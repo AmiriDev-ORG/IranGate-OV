@@ -149,7 +149,7 @@ IRANGATE را با شبکه خود به اشتراک بگذارید!
 
 - 📖 **مستندات:** [مستندات کامل](docs/)
 - 🎥 **ویدیوهای دمو:** [کانال یوتیوب](https://youtube.com/@irangate)
-- 💬 **جامعه:** [سرور دیسکورد](https://t.me/irangate_official)
+- 💬 **جامعه:** [چنل تلگرام](https://t.me/irangate_official)
 - 🐛 **گزارش باگ:** [مسائل](https://t.me/AmiriDev_ORG)
 - 💡 **درخواست ویژگی:** [بحث‌ها](https://github.com/amiridev-ORG/IranGate-OV/discussions)
 
