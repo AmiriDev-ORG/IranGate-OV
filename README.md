@@ -1,153 +1,113 @@
-# 🚀 IRANGATE - مدیریت OpenVPN با هوش مصنوعی
+# IranGate-OV 🚀
 
-[![وضعیت: آماده تولید](https://img.shields.io/badge/وضعیت-آماده%20تولید-green.svg)](https://github.com/amiridev-ORG/IranGate-OV)
-[![نسخه Go](https://img.shields.io/badge/Go-1.21+-blue.svg)](https://golang.org/)
-[![مجوز](https://img.shields.io/badge/مجوز-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-
-> **سیستم کامل مدیریت OpenVPN با اتوماسیون هوش مصنوعی و نظارت زنده**
-
-## 🌐 زبان / Language
-
-[English](README.md) | **فارسی**
+**Professional OpenVPN Gateway Management System with AI Monitoring & Web Panel**
 
 ---
 
-## 📸 تصاویر
+## Overview
 
-### نمایش رابط خط فرمان
-![نمایش CLI](https://raw.githubusercontent.com/amiridev-ORG/IranGate-OV/main/docs/screenshots/cli-demo.gif)
-*رابط خط فرمان تعاملی با نظارت زنده و یکپارچگی هوش مصنوعی*
+**IranGate-OV** is a powerful VPN gateway management system built for OpenVPN servers. It offers full CLI control, a modern web panel, and intelligent AI-based monitoring for seamless server management.
 
-### داشبورد هوش مصنوعی
-![داشبورد AI](https://raw.githubusercontent.com/amiridev-ORG/IranGate-OV/main/docs/screenshots/ai-dashboard.png)
-*نظارت مبتنی بر هوش مصنوعی با قابلیت خوددرمانی*
+* **Version:** 3.0.0
+* **Platform:** Linux (Ubuntu 22.04+, Debian 11+, CentOS 9+, Fedora)
+* **Maintainer:** AmiriDev_ORG
+* **Repository:** [GitHub](https://github.com/AmiriDev-ORG/IranGate-OV)
+* **Telegram:** [@IranGate_Official](https://t.me/IranGate_Official)
+* **Telegram Group:** [@IranGate_Community](https://t.me/IranGate_Community)
+---
 
-### آمار زنده
-![نظارت زنده](https://raw.githubusercontent.com/amiridev-ORG/IranGate-OV/main/docs/screenshots/live-stats.png)
-*نظارت زنده ترافیک و اتصالات کاربران*
+## Key Features
 
-### رابط ربات تلگرام
-![ربات تلگرام](https://raw.githubusercontent.com/amiridev-ORG/IranGate-OV/main/docs/screenshots/telegram-bot.png)
-*اعلان‌های هوشمند و مدیریت از راه دور از طریق تلگرام*
+* ✅ **CLI Management:** Start/stop OpenVPN, manage clients, monitor traffic
+* ✅ **Web Panel:** Real-time dashboard, client management, subscriptions, RBAC
+* ✅ **AI Monitoring:** Auto-healing, resource analysis, Telegram alerts
+* ✅ **Traffic Analytics:** Live stats, quota tracking, anomaly detection
+* ✅ **Backup & Recovery:** Automatic system backups & disaster recovery
+* ✅ **Multi-Protocol Support:** UDP & TCP
+* ✅ **Production Ready:** Logging, error handling, and system health checks
 
 ---
 
-## 📊 پیشرفت پروژه
+## Installation
 
-```
-🔄 هسته اصلی:        ████████████████████ ۱۰۰٪
-🔄 رابط خط فرمان:     ████████████████████ ۱۰۰٪
-🔄 یکپارچگی هوش مصنوعی: ████████████████████ ۱۰۰٪
-🔄 سیستم پایگاه داده: ████████████████████ ۱۰۰٪
-🔄 مانیتورینگ:         ████████████████████ ۱۰۰٪
-🔄 برنامه‌ریز/کرون:    ████████████████████ ۱۰۰٪
-🔄 امنیت:             ████████████████████ ۱۰۰٪
-🔄 مستندات:           ████████████████████ ۱۰۰٪
-🔄 داشبورد وب:        ████████░░░░░░░░░░░░  ۴۰٪
-🔄 اپلیکیشن موبایل:   ████░░░░░░░░░░░░░░░░  ۲۰٪
+```bash
+git clone https://github.com/AmiriDev_ORG/IranGate-OV.git
+cd IranGate-OV
+sudo ./install.sh
 ```
 
-## ✨ ویژگی‌های فعلی:
-🤖 **هوش مصنوعی** - یکپارچگی GPT OpenAI با خوددرمانی و نظارت هوشمند  
-🖥️ **رابط خط فرمان** - سیستم کامل مدیریت خط فرمان  
-📊 **نظارت زنده** - آمار ترافیک زنده و اتصالات کاربران  
-🔄 **پشتیبان‌گیری خودکار** - پشتیبان‌گیری برنامه‌ریزی شده با سیاست‌های نگهداری  
-⏰ **سیستم کرون** - برنامه‌ریز کار داخلی برای وظایف نگهداری  
-🗄️ **پایگاه داده JSON** - پایگاه داده محلی سبک و ایمن برای نخ  
-🔒 **ابزارهای امنیتی** - فایروال، مسدودسازی GeoIP و کنترل دسترسی  
-📱 **ربات تلگرام** - اعلان‌های هوشمند و مدیریت از راه دور  
+**Installation script includes:**
 
-## 🚀 شروع سریع
+* System dependencies (OpenVPN, Easy-RSA, Go, Python)
+* PKI & OpenVPN configuration
+* CLI & Web Panel setup
+* Firewall (iptables) configuration
+* systemd services & auto-start
 
-**هنوز این پروژه به رسمیت منتشر نشده. لطفا تا زمان انتشار ورژن بتا منتظر باشید**
-
-
-## 👥 تیم توسعه
-
-**توسعه‌دهنده اصلی:** [Amiri Dev](https://github.com/amiridev-ORG)  
-**مشارکت‌کنندگان:** *به زودی اعلام می‌شود*
-
-## 📅 جدول زمانی پروژه
-
-**شروع پروژه:** ۶ اکتبر ۲۰۲۴  
-**توسعه اصلی:** ۶ اکتبر - ۱۵ ژانویه ۲۰۲۵ (۱۰۰٪ تکمیل)  
-**فاز فعلی:** توسعه داشبورد وب و API  
-
-## 🗓️ برنامه ریزی انتشار
-
-**انتشار بتا:** ۱۰ نوامبر ۲۰۲۵  
-- داشبورد وب (پنل ادمین)
-- REST API
-- پورتال کاربران
-- PWA موبایل
-
-**انتشار رسمی:** سه‌ماهه اول ۲۰۲۶  
-- مجموعه ویژگی‌های کامل
-- پشتیبانی چندسرور
-- یکپارچگی پرداخت
-- ویژگی‌های سازمانی
-
-## 🏆 اسپانسرهای شگفت‌انگیز ما
-
-### 🌟 **مینو میزبان** - شریک رسمی هاستینگ
-
-**🚀 سرورهای مجازی ایران و خارج از مینو میزبان:**
-
-- 🇮🇷 **سرورهای مجازی ایران** - دسترسی سریع و بدون محدودیت
-- 🌍 **سرورهای مجازی خارج** - دیتاسنترهای متنوع در سراسر جهان
-- ⚡ **Hetzner Premium** - سرورهای قدرتمند و پایدار
-- ☁️ **3H Cloud** - زیرساخت ابری پیشرفته
-- 💰 **قیمت‌های فوق‌العاده مناسب** - بهترین قیمت در بازار ایران
-- 📞 **پشتیبانی ۲۴/۷** - پشتیبانی شبانه‌روزی به فارسی
-- 🔧 **مدیریت کامل** - پیکربندی و راه‌اندازی توسط تیم متخصص
-- 🚀 **آپتایم ۹۹.۹٪** - تضمین پایداری و در دسترس بودن
-
-**🌐 وب‌سایت:** [مینو میزبان](https://minoomizban.ir/)  
-**💬 پشتیبانی تلگرام:** [@MinooMizbanSup](https://t.me/MinooMizbanSup)  
-**📧 تماس:** از طریق سایت یا تلگرام
-
-*تشکر ویژه از مینو میزبان برای ارائه سرورهای عالی برای توسعه و تست IRANGATE!*
 ---
 
-## 💳 **💝 حمایت مالی مستقیم از IRANGATE**
-
-### 🌟 **هر مقدار حمایت شما، مهم و ارزشمند است!**
-
-
-
-### 🏦 **اطلاعات کارت بانکی:**
+## Project Structure
 
 ```
-┌─────────────────────────────────────┐
-│  🏦 شماره کارت: 6066-5692-8619-6219  │
-│  👤 به نام: امیررضا رادسر            │
-│  🏪 بانک: بلو                        │
-└─────────────────────────────────────┘
+irangate/
+├── main.go          # CLI entry point
+├── pkg/             # Core Go packages (CLI, AI, client, traffic, backup)
+├── webpanel/        # Frontend + Backend
+├── modules/         # Installation scripts
+├── scripts/         # Helper scripts
+├── clients/         # Generated client .ovpn files
+├── database/        # JSON/SQLite storage
+├── logs/            # Logs
+└── templates/       # OpenVPN templates
 ```
 
-**💝 هر حمایتی که می‌کنید، مستقیماً به بهبود IRANGATE کمک می‌کند!**
 ---
 
-### 🙏 **تشکر از حامیان فعلی:**
+## Quick Workflow
 
-*لیست حامیان به زودی منتشر می‌شود*
+### Adding a Client
 
+1. Use CLI: `irangate client add` or Web Panel
+2. Generates certificate via EasyRSA
+3. Creates `.ovpn` configuration & optional QR code
+4. Stores data in `/opt/irangate/clients/` and database
 
+### Traffic Monitoring
 
-**💝 هر مقداری از حمایت شما انگیزه بخش ما هست**
+* Parses `openvpn-status.log` in real-time
+* Aggregates hourly → daily → monthly
+* Sends alerts & updates Web Panel via WebSocket
+
+### AI Auto-Healing ( Under Codes - Working for it !)
+
+* Python agent monitors CPU, RAM, Disk, Network
+* Analyzes via OpenAI API
+* Performs auto-recovery & sends Telegram alerts
+
 ---
-## 🔗 لینک‌های پروژه
 
-- 📖 **مستندات:** [مستندات کامل](docs/)
-- 🎥 **ویدیوهای دمو:** [کانال یوتیوب](https://youtube.com/@irangate)
-- 💬 **جامعه:** [چنل تلگرام](https://t.me/irangate_official)
-- 🐛 **گزارش باگ:** [مسائل](https://t.me/AmiriDev_ORG)
-- 💡 **درخواست ویژگی:** [بحث‌ها](https://github.com/amiridev-ORG/IranGate-OV/discussions)
+## Tech Stack
 
----
-
- ⭐ **استار بزنید** | 👀 **دنبال کنید** | 💬 [تلگرام](https://t.me/irangate_official)
+* **Backend:** Go 1.24, Cobra, Viper, Logrus
+* **Frontend:** HTML5, CSS3, JS, WebSocket
+* **Database:** JSON, SQLite, in-memory cache
+* **Infrastructure:** OpenVPN, Easy-RSA, systemd, iptables
+* **AI:** Python 3.7+, OpenAI GPT API, Telegram Bot API
 
 ---
 
-*ساخته شده با ❤️ توسط تیم IRANGATE*
+## Contribution
+
+1. Fork the repository
+2. Create a new branch
+3. Commit your changes
+4. Open a Pull Request
+
+---
+
+## 💰 Donation: [DonateLink](https://donito.me/irangate)
+---
+
+## License
+
+[Specify your license here]
