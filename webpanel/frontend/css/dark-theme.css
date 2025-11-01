@@ -1,0 +1,415 @@
+/* IranGate Dark Theme - Navy Blue, Black, Dark Blue */
+
+:root {
+    --navy-900: #0a192f;
+    --navy-800: #112240;
+    --navy-700: #1a2f4f;
+    --blue-600: #1e3a5f;
+    --blue-500: #2e5090;
+    --accent-blue: #64ffda;
+    --accent-cyan: #00d4ff;
+    --text-primary: #e6f1ff;
+    --text-secondary: #8892b0;
+    --text-muted: #495670;
+    --success: #10b981;
+    --error: #ef4444;
+    --warning: #f59e0b;
+}
+
+body {
+    background: var(--navy-900) !important;
+    color: var(--text-primary);
+    position: relative;
+    overflow-x: hidden;
+    min-height: 100vh;
+}
+
+/* Animated Background Container */
+#particleCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+    background: transparent;
+}
+
+/* Ensure content is above background */
+nav, .max-w-7xl, .max-w-4xl, .min-h-screen {
+    position: relative;
+    z-index: 1;
+}
+
+/* Navigation Bar */
+nav {
+    background: rgba(17, 34, 64, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--blue-600);
+}
+
+nav .text-purple-600 {
+    background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+nav a {
+    color: var(--text-secondary);
+    transition: color 0.3s;
+}
+
+nav a:hover,
+nav a.text-purple-600 {
+    color: var(--accent-cyan);
+}
+
+/* Cards and Containers */
+.bg-white {
+    background: rgba(17, 34, 64, 0.8) !important;
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--blue-600);
+}
+
+.shadow,
+.shadow-lg,
+.shadow-md,
+.shadow-2xl {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* Text Colors */
+.text-gray-800,
+.text-gray-900 {
+    color: var(--text-primary) !important;
+}
+
+.text-gray-600,
+.text-gray-700 {
+    color: var(--text-secondary) !important;
+}
+
+.text-gray-500 {
+    color: var(--text-muted) !important;
+}
+
+/* Buttons */
+.bg-purple-600,
+.bg-purple-500 {
+    background: linear-gradient(135deg, #2e5090, #1e3a5f) !important;
+    border: 1px solid var(--accent-cyan);
+}
+
+.bg-purple-600:hover,
+.bg-purple-500:hover,
+.hover\:bg-purple-700:hover {
+    background: linear-gradient(135deg, #3a5fa0, #2e4a6f) !important;
+    box-shadow: 0 0 20px rgba(100, 255, 218, 0.3);
+}
+
+.bg-blue-500,
+.bg-blue-600 {
+    background: linear-gradient(135deg, #2e5090, #1a2f4f) !important;
+}
+
+.bg-blue-500:hover,
+.bg-blue-600:hover {
+    background: linear-gradient(135deg, #3a5fa0, #2a3f5f) !important;
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+}
+
+.bg-green-500,
+.bg-green-600 {
+    background: linear-gradient(135deg, #10b981, #059669) !important;
+}
+
+.bg-red-600 {
+    background: linear-gradient(135deg, #ef4444, #dc2626) !important;
+}
+
+.bg-orange-500,
+.bg-orange-600 {
+    background: linear-gradient(135deg, #f59e0b, #d97706) !important;
+}
+
+.bg-yellow-500 {
+    background: linear-gradient(135deg, #f59e0b, #d97706) !important;
+}
+
+.bg-indigo-600 {
+    background: linear-gradient(135deg, #2e5090, #1e3a5f) !important;
+}
+
+/* Input Fields */
+input[type="text"],
+input[type="password"],
+input[type="number"],
+input[type="file"],
+select,
+textarea {
+    background: rgba(26, 47, 79, 0.8) !important;
+    border: 1px solid var(--blue-600) !important;
+    color: var(--text-primary) !important;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    background: rgba(26, 47, 79, 0.9) !important;
+    border-color: var(--accent-cyan) !important;
+    box-shadow: 0 0 0 3px rgba(100, 255, 218, 0.1) !important;
+}
+
+input::placeholder,
+textarea::placeholder {
+    color: var(--text-muted) !important;
+}
+
+/* Tables */
+table thead {
+    background: rgba(26, 47, 79, 0.9) !important;
+}
+
+table tbody tr:hover {
+    background: rgba(30, 58, 95, 0.5) !important;
+}
+
+.divide-y > * {
+    border-color: var(--blue-600) !important;
+}
+
+/* Stats Cards */
+.bg-green-100 {
+    background: rgba(16, 185, 129, 0.1) !important;
+}
+
+.bg-blue-100 {
+    background: rgba(46, 80, 144, 0.2) !important;
+}
+
+.bg-purple-100 {
+    background: rgba(100, 255, 218, 0.1) !important;
+}
+
+.bg-yellow-100 {
+    background: rgba(245, 158, 11, 0.1) !important;
+}
+
+.text-green-600 {
+    color: var(--success) !important;
+}
+
+.text-blue-600 {
+    color: var(--accent-cyan) !important;
+}
+
+.text-purple-600 {
+    color: var(--accent-blue) !important;
+}
+
+.text-yellow-600,
+.text-yellow-400 {
+    color: var(--warning) !important;
+}
+
+.text-red-600,
+.text-red-500 {
+    color: var(--error) !important;
+}
+
+/* Badges */
+.bg-green-100.text-green-800 {
+    background: rgba(16, 185, 129, 0.2) !important;
+    color: var(--success) !important;
+}
+
+.bg-gray-100.text-gray-800 {
+    background: rgba(73, 86, 112, 0.2) !important;
+    color: var(--text-muted) !important;
+}
+
+/* Alerts */
+.bg-yellow-50 {
+    background: rgba(245, 158, 11, 0.1) !important;
+    border-color: var(--warning) !important;
+}
+
+.bg-green-50 {
+    background: rgba(16, 185, 129, 0.1) !important;
+    border-color: var(--success) !important;
+}
+
+.bg-blue-50 {
+    background: rgba(0, 212, 255, 0.1) !important;
+    border-color: var(--accent-cyan) !important;
+}
+
+.bg-red-50 {
+    background: rgba(239, 68, 68, 0.1) !important;
+    border-color: var(--error) !important;
+}
+
+.text-yellow-800,
+.text-yellow-700 {
+    color: var(--warning) !important;
+}
+
+.text-green-800,
+.text-green-700 {
+    color: var(--success) !important;
+}
+
+.text-blue-800,
+.text-blue-700 {
+    color: var(--accent-cyan) !important;
+}
+
+.text-red-800,
+.text-red-700 {
+    color: var(--error) !important;
+}
+
+/* Progress Bars */
+.bg-gray-200 {
+    background: rgba(26, 47, 79, 0.5) !important;
+}
+
+/* Modals */
+.bg-black {
+    background: rgba(10, 25, 47, 0.9) !important;
+    backdrop-filter: blur(5px);
+}
+
+/* Login Page */
+body.min-h-screen {
+    background: var(--navy-900);
+}
+
+.bg-gradient-to-r {
+    background: linear-gradient(135deg, var(--blue-500), var(--navy-800)) !important;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--navy-800);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--blue-600);
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--blue-500);
+}
+
+/* Code blocks */
+code,
+.font-mono {
+    background: rgba(26, 47, 79, 0.5) !important;
+    color: var(--accent-cyan) !important;
+    padding: 2px 6px;
+    border-radius: 3px;
+}
+
+/* Links */
+a {
+    color: var(--accent-cyan);
+}
+
+a:hover {
+    color: var(--accent-blue);
+}
+
+/* Glow effects for interactive elements */
+button:hover,
+.hover\:scale-105:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 25px rgba(100, 255, 218, 0.2);
+}
+
+/* Statistics Cards Glow */
+.bg-white.rounded-lg.shadow {
+    transition: all 0.3s ease;
+}
+
+.bg-white.rounded-lg.shadow:hover {
+    border-color: var(--accent-cyan);
+    box-shadow: 0 4px 30px rgba(100, 255, 218, 0.15) !important;
+}
+
+/* Login Box */
+.bg-white.rounded-2xl {
+    background: rgba(17, 34, 64, 0.95) !important;
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--blue-600);
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.6);
+}
+
+/* Special accent for logo area */
+.bg-gradient-to-r.from-purple-500.to-indigo-600 {
+    background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue)) !important;
+}
+
+/* Toast Notifications */
+.fixed.top-4.right-4 {
+    backdrop-filter: blur(10px);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .bg-white {
+        background: rgba(17, 34, 64, 0.95) !important;
+    }
+}
+
+/* Animations */
+@keyframes glow {
+    0%, 100% {
+        box-shadow: 0 0 20px rgba(100, 255, 218, 0.2);
+    }
+    50% {
+        box-shadow: 0 0 30px rgba(100, 255, 218, 0.4);
+    }
+}
+
+.animate-glow {
+    animation: glow 2s ease-in-out infinite;
+}
+
+/* Header gradient text */
+h1, h2, h3 {
+    background: linear-gradient(135deg, var(--text-primary), var(--accent-cyan));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Border accents */
+.border-l-4 {
+    border-left-width: 4px !important;
+}
+
+.border-yellow-400 {
+    border-color: var(--warning) !important;
+}
+
+.border-green-400 {
+    border-color: var(--success) !important;
+}
+
+.border-blue-400 {
+    border-color: var(--accent-cyan) !important;
+}
+
+.border-red-200 {
+    border-color: var(--error) !important;
+}
+

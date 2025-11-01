@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maintenance - IranGate</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="css/dark-theme.css">
+    <link rel="stylesheet" href="css/loading.css">
+    <link rel="stylesheet" href="css/mobile.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="stylesheet" href="css/themes.css">
+    <link rel="stylesheet" href="css/theme-overrides.css">
+    <script src="js/sidebar.js"></script>
+    <script src="js/theme-loader.js"></script>
+    <script src="js/backup.js"></script>
+    <script src="js/logs.js"></script>
+</head>
+<body>
+    <!-- Sidebar will be inserted here by sidebar.js -->
+
+    <!-- Main Content -->
+    <div class="main-content">
+    <div class="max-w-7xl mx-auto px-4 py-8">
+        <!-- Header -->
+        <div class="flex justify-between items-center mb-8">
+            <div>
+                <h1 class="text-3xl font-bold text-gray-800">Maintenance</h1>
+                <p class="text-gray-600 mt-2">Backup, logs, and system maintenance tools</p>
+            </div>
+        </div>
+
+        <!-- Tabs -->
+        <div class="mb-8">
+            <nav class="flex space-x-8" aria-label="Tabs">
+                <button id="backupTab" class="tab-button active" onclick="switchTab('backup')">
+                    Backup & Restore
+                </button>
+                <button id="logsTab" class="tab-button" onclick="switchTab('logs')">
+                    Log Viewer
+                </button>
+                <button id="cleanupTab" class="tab-button" onclick="switchTab('cleanup')">
+                    System Cleanup
+                </button>
+            </nav>
+        </div>
+
+        <!-- Backup & Restore Tab -->
+        <div id="backupContent" class="tab-content">
+            <!-- Backup Schedules -->
+            <div class="bg-white rounded-lg shadow p-6 mb-8">
+                <div class="flex items-center justify-between mb-6">
+                    <h2 class="text-xl font-semibold text-gray-800">Backup Schedules</h2>
+                    <button id="addBackupScheduleBtn" 
+                            class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg">
+                        Add Schedule
+                    </button>
+                </div>
+
+                <div id="backupSchedulesList" class="space-y-4">
+                    <!-- Backup schedules will be loaded here -->
+                </div>
+            </div>
+
+            <!-- Available Backups -->
+            <div class="bg-white rounded-lg shadow p-6 mb-8">
+                <div class="flex items-center justify-between mb-6">
+                    <h2 class="text-xl font-semibold text-gray-800">Available Backups</h2>
+                    <button id="refreshBackupsBtn" 
+                            class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg">
+                        Refresh
+                    </button>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Filename</th>
+                                <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Size</th>
+                                <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Created</th>
+                                <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="backupsTable" class="divide-y divide-gray-200">
+                            <tr>
+                                <td colspan="4" class="px-4 py-8 text-center text-gray-500">Loading...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Log Viewer Tab -->
+        <div id="logsContent" class="tab-content hidden">
+            <!-- Log Controls -->
+            <div class="bg-white rounded-lg shadow p-6 mb-8">
+                <div class="flex items-center justify-between mb-6">
+                    <h2 class="text-xl font-semibold text-gray-800">Log Viewer</h2>
+                    <div class="flex space-x-2">
+                        <select id="logType" class="px-3 py-2 border border-gray-300 rounded-lg">
+                            <option value="openvpn">OpenVPN</option>
+                            <option value="webpanel">WebPanel</option>
+                            <option value="system">System</option>
+                        </select>
+                        <button id="refreshLogsBtn" 
+                                class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg">
+                            Refresh
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Log Filters -->
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Search</label>
+                        <input type="text" id="logSearch" placeholder="Search logs..."
+                               class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Level</label>
+                        <select id="logLevel" class="w-full px-3 py-2 border border-gray-300 rounded-lg">
+                            <option value="">All Levels</option>
+                            <option value="error">Error</option>
+                            <option value="warn">Warning</option>
+                            <option value="info">Info</option>
+                            <option value="debug">Debug</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Lines</label>
+                        <select id="logLines" class="w-full px-3 py-2 border border-gray-300 rounded-lg">
+                            <option value="50">Last 50 lines</option>
+                            <option value="100">Last 100 lines</option>
+                            <option value="500">Last 500 lines</option>
+                            <option value="1000">Last 1000 lines</option>
+                        </select>
+                    </div>
+                    <div class="flex items-end">
+                        <button id="searchLogsBtn" 
+                                class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg w-full">
+                            Search
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Real-time Controls -->
+                <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                    <div class="flex items-center space-x-4">
+                        <button id="tailLogsBtn" 
+                                class="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg">
+                            Tail Logs
+                        </button>
+                        <button id="streamLogsBtn" 
+                                class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg">
+                            Stream
+                        </button>
+                        <span id="logStatus" class="text-sm text-gray-600">Ready</span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <label class="text-sm text-gray-700">Auto-refresh:</label>
+                        <input type="checkbox" id="autoRefreshLogs" 
+                               class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
+                        <span class="text-sm text-gray-600">5s</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Log Display -->
+            <div class="bg-white rounded-lg shadow">
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-semibold text-gray-800">Log Output</h3>
+                        <div class="flex space-x-2">
+                            <button id="clearLogsBtn" 
+                                    class="bg-gray-600 hover:bg-gray-700 text-white px-3 py-1 rounded text-sm">
+                                Clear
+                            </button>
+                            <button id="downloadLogsBtn" 
+                                    class="bg-green-600 hover:bg-green-700 text-white px-3 py-1 rounded text-sm">
+                                Download
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div id="logOutput" class="bg-black text-green-400 p-4 rounded-lg font-mono text-sm h-96 overflow-y-auto">
+                        <div class="text-gray-500">Select log type and click "Tail Logs" to view recent entries...</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- System Cleanup Tab -->
+        <div id="cleanupContent" class="tab-content hidden">
+            <!-- Disk Usage -->
+            <div class="bg-white rounded-lg shadow p-6 mb-8">
+                <h2 class="text-xl font-semibold text-gray-800 mb-6">Disk Usage</h2>
+                
+                <div id="diskUsageInfo" class="space-y-4">
+                    <!-- Disk usage will be loaded here -->
+                </div>
+            </div>
+
+            <!-- Cleanup Tools -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Log Cleanup -->
+                <div class="bg-white rounded-lg shadow p-6">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-4">Log Cleanup</h3>
+                    <p class="text-gray-600 mb-4">Remove old log files to free up disk space</p>
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm text-gray-700">Clean logs older than:</span>
+                            <select id="logCleanupDays" class="px-2 py-1 border border-gray-300 rounded">
+                                <option value="7">7 days</option>
+                                <option value="30">30 days</option>
+                                <option value="90" selected>90 days</option>
+                            </select>
+                        </div>
+                        <button id="cleanupLogsBtn" 
+                                class="bg-yellow-600 hover:bg-yellow-700 text-white px-4 py-2 rounded-lg w-full">
+                            Clean Logs
+                        </button>
+                    </div>
+                </div>
+
+                <!-- History Cleanup -->
+                <div class="bg-white rounded-lg shadow p-6">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-4">History Cleanup</h3>
+                    <p class="text-gray-600 mb-4">Remove old connection history and statistics</p>
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm text-gray-700">Clean history older than:</span>
+                            <select id="historyCleanupDays" class="px-2 py-1 border border-gray-300 rounded">
+                                <option value="30">30 days</option>
+                                <option value="90">90 days</option>
+                                <option value="180" selected>180 days</option>
+                            </select>
+                        </div>
+                        <button id="cleanupHistoryBtn" 
+                                class="bg-orange-600 hover:bg-orange-700 text-white px-4 py-2 rounded-lg w-full">
+                            Clean History
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Database Optimization -->
+                <div class="bg-white rounded-lg shadow p-6">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-4">Database Optimization</h3>
+                    <p class="text-gray-600 mb-4">Optimize database files and remove unused data</p>
+                    <button id="optimizeDbBtn" 
+                            class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg w-full">
+                        Optimize Database
+                    </button>
+                </div>
+
+                <!-- Orphaned Certificates -->
+                <div class="bg-white rounded-lg shadow p-6">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-4">Orphaned Certificates</h3>
+                    <p class="text-gray-600 mb-4">Remove orphaned certificates that can still connect</p>
+                    <button id="cleanupOrphanedBtn" 
+                            class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg w-full">
+                        Clean Orphaned Certs
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <!-- Backup Schedule Modal -->
+    <div id="backupScheduleModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 hidden z-50">
+        <div class="flex items-center justify-center min-h-screen p-4">
+            <div class="bg-white rounded-lg shadow-xl max-w-md w-full p-6">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-lg font-semibold text-gray-800">Add Backup Schedule</h3>
+                    <button id="closeBackupScheduleModal" class="text-gray-400 hover:text-gray-600">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                        </svg>
+                    </button>
+                </div>
+
+                <form id="backupScheduleForm" class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Name</label>
+                        <input type="text" id="scheduleName" name="name" required
+                               class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Description</label>
+                        <textarea id="scheduleDescription" name="description" rows="2"
+                                  class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Cron Expression</label>
+                        <input type="text" id="scheduleCron" name="cron_expression" required
+                               placeholder="0 2 * * * (daily at 2 AM)"
+                               class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <p class="text-xs text-gray-500 mt-1">Format: minute hour day month weekday</p>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Retention (days)</label>
+                            <input type="number" id="scheduleRetention" name="retention_days" 
+                                   value="30" min="1" max="365"
+                                   class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Backup Path</label>
+                            <input type="text" id="schedulePath" name="backup_path" 
+                                   value="/opt/irangate/backups"
+                                   class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                    </div>
+
+                    <div class="flex items-center">
+                        <input type="checkbox" id="scheduleEnabled" name="enabled" 
+                               class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded" checked>
+                        <label for="scheduleEnabled" class="ml-2 block text-sm text-gray-700">
+                            Enable this schedule
+                        </label>
+                    </div>
+
+                    <div class="flex justify-end space-x-2">
+                        <button type="button" id="cancelBackupSchedule" 
+                                class="px-4 py-2 text-gray-600 hover:text-gray-800">
+                            Cancel
+                        </button>
+                        <button type="submit" 
+                                class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg">
+                            Save
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Tab switching functionality
+        function switchTab(tabName) {
+            // Hide all tab contents
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.add('hidden');
+            });
+            
+            // Remove active class from all tabs
+            document.querySelectorAll('.tab-button').forEach(button => {
+                button.classList.remove('active');
+            });
+            
+            // Show selected tab content
+            document.getElementById(tabName + 'Content').classList.remove('hidden');
+            
+            // Add active class to selected tab
+            document.getElementById(tabName + 'Tab').classList.add('active');
+            
+            // Load content based on tab
+            if (tabName === 'backup') {
+                loadBackupSchedules();
+                loadBackups();
+            } else if (tabName === 'logs') {
+                // Initialize log viewer
+            } else if (tabName === 'cleanup') {
+                loadDiskUsage();
+            }
+        }
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load initial content
+            loadBackupSchedules();
+            loadBackups();
+            loadDiskUsage();
+            
+            // Event listeners for backup tab
+            document.getElementById('addBackupScheduleBtn').addEventListener('click', showBackupScheduleModal);
+            document.getElementById('closeBackupScheduleModal').addEventListener('click', hideBackupScheduleModal);
+            document.getElementById('cancelBackupSchedule').addEventListener('click', hideBackupScheduleModal);
+            document.getElementById('backupScheduleForm').addEventListener('submit', saveBackupSchedule);
+            document.getElementById('refreshBackupsBtn').addEventListener('click', loadBackups);
+            
+            // Event listeners for cleanup tab
+            document.getElementById('cleanupLogsBtn').addEventListener('click', cleanupLogs);
+            document.getElementById('cleanupHistoryBtn').addEventListener('click', cleanupHistory);
+            document.getElementById('optimizeDbBtn').addEventListener('click', optimizeDatabase);
+            document.getElementById('cleanupOrphanedBtn').addEventListener('click', cleanupOrphaned);
+        });
+    </script>
+
+    <style>
+        .tab-button {
+            @apply px-1 py-4 border-b-2 border-transparent text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300;
+        }
+        .tab-button.active {
+            @apply border-blue-500 text-blue-600;
+        }
+    </style>
+</body>
+</html>

@@ -1,0 +1,60 @@
+{
+  "cron.json": {
+    "jobs": [
+      {
+        "action": "backup",
+        "enabled": true,
+        "id": "backup_daily",
+        "last_run": null,
+        "params": {
+          "retention_days": 7,
+          "type": "full"
+        },
+        "schedule": "0 2 * * *"
+      },
+      {
+        "action": "monitor",
+        "enabled": true,
+        "id": "monitor_check",
+        "last_run": null,
+        "params": {
+          "alert_threshold": 90,
+          "type": "health"
+        },
+        "schedule": "*/30 * * * *"
+      }
+    ]
+  },
+  "settings.json": {
+    "auto_config_mode": "dynamic",
+    "backup_path": "/opt/irangate/database/backups/",
+    "cipher": "AES-256-GCM",
+    "dns": [
+      "1.1.1.1",
+      "8.8.8.8"
+    ],
+    "install_date": "2025-10-07T12:00:00Z",
+    "ipv6_enabled": false,
+    "last_backup": null,
+    "log_level": 3,
+    "mtu": 1412,
+    "protocol": "udp",
+    "server_ip": "0.0.0.0",
+    "server_port": 1194,
+    "version": "1.0.0"
+  },
+  "users.json": {
+    "clients": [
+      {
+        "active": true,
+        "cipher": "AES-256-GCM",
+        "created_at": "2025-10-07T12:00:00Z",
+        "data_used_mb": 0,
+        "expires_at": "2025-11-07T12:00:00Z",
+        "ip": "10.8.0.2",
+        "last_connection": null,
+        "name": "example_user"
+      }
+    ]
+  }
+}

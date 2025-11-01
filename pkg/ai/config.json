@@ -1,0 +1,15 @@
+{
+  "monitoring_interval": 60,
+  "cpu_threshold": 90,
+  "ram_threshold": 95,
+  "disk_threshold": 10,
+  "max_failed_connections": 100,
+  "auto_fix_enabled": true,
+  "telegram_notifications": true,
+  "openai_api_key": "",
+  "telegram_bot_token": "",
+  "admin_chat_id": "",
+  "log_file": "/var/log/irangate/ai_agent.log",
+  "description": "IRANGATE AI Management Configuration",
+  "version": "1.0.0"
+}

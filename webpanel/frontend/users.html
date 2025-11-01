@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Management - IranGate</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="css/dark-theme.css">
+    <link rel="stylesheet" href="css/loading.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="stylesheet" href="css/themes.css">
+    <link rel="stylesheet" href="css/theme-overrides.css">
+    <script src="js/particles.js"></script>
+    <script src="js/sidebar.js"></script>
+    <script src="js/theme-loader.js"></script>
+    <link rel="stylesheet" href="css/language-rtl.css">
+    <script src="js/language-toggle.js"></script>
+</head>
+<body>
+    <div class="main-content">
+    <div class="max-w-6xl mx-auto px-4 py-8">
+        <div class="flex justify-between items-center mb-8">
+            <div>
+                <h1 class="text-3xl font-bold text-gray-800">User Management</h1>
+                <p class="text-gray-600 mt-2">Manage admin users and roles</p>
+            </div>
+            <button onclick="showAddUser()" class="bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-lg">
+                Add User
+            </button>
+        </div>
+
+        <div class="bg-white rounded-lg shadow overflow-hidden">
+            <table class="w-full">
+                <thead class="bg-gray-50">
+                    <tr>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Username</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Email</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Role</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Status</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Last Login</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="usersTable" class="divide-y divide-gray-200"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <div id="addUserModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div class="bg-white rounded-lg p-8 max-w-md w-full">
+            <h2 class="text-2xl font-bold mb-6">Add New User</h2>
+            <form id="addUserForm" class="space-y-4">
+                <input type="text" id="newUsername" placeholder="Username" required class="w-full px-4 py-2 border rounded-lg">
+                <input type="email" id="newEmail" placeholder="Email" required class="w-full px-4 py-2 border rounded-lg">
+                <input type="password" id="newPassword" placeholder="Password" required class="w-full px-4 py-2 border rounded-lg">
+                <select id="newRole" class="w-full px-4 py-2 border rounded-lg">
+                    <option value="admin">Admin - Full Access</option>
+                    <option value="moderator">Moderator - Manage Clients</option>
+                    <option value="viewer">Viewer - Read Only</option>
+                </select>
+                <div class="flex gap-4">
+                    <button type="button" onclick="hideAddUser()" class="flex-1 bg-gray-200 py-2 rounded-lg">Cancel</button>
+                    <button type="submit" class="flex-1 bg-purple-600 text-white py-2 rounded-lg">Create</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/api.js"></script>
+    <script src="js/notifications.js"></script>
+    <script>
+        checkAuth();
+
+        async function loadUsers() {
+            const result = await api.request('/users');
+            if (result.success) {
+                renderUsers(result.data || []);
+            }
+        }
+
+        function renderUsers(users) {
+            const tbody = document.getElementById('usersTable');
+            tbody.innerHTML = users.map(user => `
+                <tr class="hover:bg-gray-50">
+                    <td class="px-6 py-4 font-medium">${user.username}</td>
+                    <td class="px-6 py-4">${user.email}</td>
+                    <td class="px-6 py-4">
+                        <span class="px-2 py-1 text-xs rounded-full ${
+                            user.role === 'admin' ? 'bg-purple-100 text-purple-800' :
+                            user.role === 'moderator' ? 'bg-blue-100 text-blue-800' :
+                            'bg-gray-100 text-gray-800'
+                        }">${user.role}</span>
+                    </td>
+                    <td class="px-6 py-4">
+                        <span class="px-2 py-1 text-xs rounded-full ${user.active ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}">
+                            ${user.active ? 'Active' : 'Inactive'}
+                        </span>
+                    </td>
+                    <td class="px-6 py-4 text-sm">${formatDate(user.last_login)}</td>
+                    <td class="px-6 py-4 space-x-2">
+                        <button onclick="deleteUser('${user.username}')" class="text-red-600 hover:text-red-900">Remove</button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function showAddUser() {
+            document.getElementById('addUserModal').classList.remove('hidden');
+        }
+
+        function hideAddUser() {
+            document.getElementById('addUserModal').classList.add('hidden');
+        }
+
+        document.getElementById('addUserForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const user = {
+                username: document.getElementById('newUsername').value,
+                email: document.getElementById('newEmail').value,
+                password: document.getElementById('newPassword').value,
+                role: document.getElementById('newRole').value
+            };
+
+            const result = await api.request('/users', 'POST', user);
+            if (result.success) {
+                notificationManager.success('User created successfully');
+                hideAddUser();
+                loadUsers();
+            }
+        });
+
+        async function deleteUser(username) {
+            if (!confirm(`Delete user "${username}"?`)) return;
+            const result = await api.request(`/users/${username}`, 'DELETE');
+            if (result.success) {
+                notificationManager.success('User deleted');
+                loadUsers();
+            }
+        }
+
+        loadUsers();
+
+        // Initialize sidebar
+        initSidebar('users');
+    </script>
+    </div>
+</body>
+</html>
+

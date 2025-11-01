@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notifications - IranGate</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="css/dark-theme.css">
+    <link rel="stylesheet" href="css/loading.css">
+    <link rel="stylesheet" href="css/mobile.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="stylesheet" href="css/themes.css">
+    <link rel="stylesheet" href="css/theme-overrides.css">
+    <link rel="stylesheet" href="css/themes.css">
+    <link rel="stylesheet" href="css/theme-overrides.css">
+    <script src="js/sidebar.js"></script>
+    <script src="js/theme-loader.js"></script>
+    <script src="js/theme-loader.js"></script>
+    <link rel="stylesheet" href="css/language-rtl.css">
+    <script src="js/language-toggle.js"></script>
+    <script src="js/telegram.js"></script>
+</head>
+<body>
+    <!-- Sidebar will be inserted here by sidebar.js -->
+
+    <!-- Main Content -->
+    <div class="main-content">
+    <div class="max-w-7xl mx-auto px-4 py-8">
+        <!-- Header -->
+        <div class="flex justify-between items-center mb-8">
+            <div>
+                <h1 class="text-3xl font-bold text-gray-800">Notifications</h1>
+                <p class="text-gray-600 mt-2">Configure Telegram and email notifications</p>
+            </div>
+        </div>
+
+        <!-- Telegram Configuration -->
+        <div class="bg-white rounded-lg shadow p-6 mb-8">
+            <div class="flex items-center justify-between mb-6">
+                <h2 class="text-xl font-semibold text-gray-800">Telegram Bot Configuration</h2>
+                <div id="telegramStatus" class="flex items-center">
+                    <span class="inline-block w-3 h-3 bg-gray-400 rounded-full mr-2"></span>
+                    <span class="text-sm text-gray-600">Checking...</span>
+                </div>
+            </div>
+
+            <form id="telegramConfigForm" class="space-y-4">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Bot Token</label>
+                        <input type="password" id="botToken" name="bot_token" 
+                               class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                               placeholder="123456789:ABCdefGHIjklMNOpqrsTUVwxyz">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Chat ID</label>
+                        <input type="text" id="chatId" name="chat_id" 
+                               class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                               placeholder="123456789 or @channel_username">
+                    </div>
+                </div>
+
+                <div class="flex items-center">
+                    <input type="checkbox" id="telegramEnabled" name="enabled" 
+                           class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
+                    <label for="telegramEnabled" class="ml-2 block text-sm text-gray-700">
+                        Enable Telegram notifications
+                    </label>
+                </div>
+
+                <div class="flex gap-2">
+                    <button type="submit" 
+                            class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg">
+                        Save Configuration
+                    </button>
+                    <button type="button" id="testTelegramBtn" 
+                            class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg">
+                        Test Connection
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Notification Settings -->
+        <div class="bg-white rounded-lg shadow p-6 mb-8">
+            <h2 class="text-xl font-semibold text-gray-800 mb-6">Notification Preferences</h2>
+            
+            <form id="notificationSettingsForm" class="space-y-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Client Events -->
+                    <div class="space-y-4">
+                        <h3 class="text-lg font-medium text-gray-800">Client Events</h3>
+                        
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between">
+                                <label class="text-sm text-gray-700">Client expiring soon</label>
+                                <input type="checkbox" id="clientExpiring" name="client_expiring" 
+                                       class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
+                            </div>
+                            
+                            <div class="flex items-center justify-between">
+                                <label class="text-sm text-gray-700">Client quota exceeded</label>
+                                <input type="checkbox" id="quotaExceeded" name="client_quota_exceeded" 
+                                       class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
+                            </div>
+                            
+                            <div class="flex items-center justify-between">
+                                <label class="text-sm text-gray-700">New client created</label>
+                                <input type="checkbox" id="newClientCreated" name="new_client_created" 
+                                       class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- System Events -->
+                    <div class="space-y-4">
+                        <h3 class="text-lg font-medium text-gray-800">System Events</h3>
+                        
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between">
+                                <label class="text-sm text-gray-700">Server resource warnings</label>
+                                <input type="checkbox" id="resourceWarning" name="server_resource_warn" 
+                                       class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
+                            </div>
+                            
+                            <div class="flex items-center justify-between">
+                                <label class="text-sm text-gray-700">OpenVPN service down</label>
+                                <input type="checkbox" id="openvpnDown" name="openvpn_down" 
+                                       class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
+                            </div>
+                            
+                            <div class="flex items-center justify-between">
+                                <label class="text-sm text-gray-700">OpenVPN service restarted</label>
+                                <input type="checkbox" id="openvpnRestarted" name="openvpn_restarted" 
+                                       class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Expiring Days Setting -->
+                <div class="border-t pt-4">
+                    <div class="flex items-center space-x-4">
+                        <label class="text-sm font-medium text-gray-700">Notify when client expires in:</label>
+                        <select id="expiringDays" name="expiring_days" 
+                                class="px-3 py-1 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <option value="1">1 day</option>
+                            <option value="3">3 days</option>
+                            <option value="7" selected>7 days</option>
+                            <option value="14">14 days</option>
+                            <option value="30">30 days</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="flex justify-end">
+                    <button type="submit" 
+                            class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg">
+                        Save Settings
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Auto-Actions -->
+        <div class="bg-white rounded-lg shadow p-6 mb-8">
+            <div class="flex items-center justify-between mb-6">
+                <h2 class="text-xl font-semibold text-gray-800">Auto-Actions</h2>
+                <button id="addAutoActionBtn" 
+                        class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg">
+                    Add Auto-Action
+                </button>
+            </div>
+
+            <div id="autoActionsList" class="space-y-4">
+                <!-- Auto-actions will be loaded here -->
+            </div>
+        </div>
+
+        <!-- Notification History -->
+        <div class="bg-white rounded-lg shadow p-6">
+            <h2 class="text-xl font-semibold text-gray-800 mb-6">Recent Notifications</h2>
+            
+            <div class="overflow-x-auto">
+                <table class="w-full">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Time</th>
+                            <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Type</th>
+                            <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Message</th>
+                            <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="notificationHistoryTable" class="divide-y divide-gray-200">
+                        <tr>
+                            <td colspan="4" class="px-4 py-8 text-center text-gray-500">No notifications yet</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <!-- Auto-Action Modal -->
+    <div id="autoActionModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 hidden z-50">
+        <div class="flex items-center justify-center min-h-screen p-4">
+            <div class="bg-white rounded-lg shadow-xl max-w-md w-full p-6">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-lg font-semibold text-gray-800">Add Auto-Action</h3>
+                    <button id="closeAutoActionModal" class="text-gray-400 hover:text-gray-600">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                        </svg>
+                    </button>
+                </div>
+
+                <form id="autoActionForm" class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Name</label>
+                        <input type="text" id="actionName" name="name" required
+                               class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Description</label>
+                        <textarea id="actionDescription" name="description" rows="2"
+                                  class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Trigger</label>
+                            <select id="actionTrigger" name="trigger" required
+                                    class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <option value="">Select trigger</option>
+                                <option value="client_expired">Client Expired</option>
+                                <option value="client_expiring">Client Expiring</option>
+                                <option value="quota_exceeded">Quota Exceeded</option>
+                                <option value="resource_warning">Resource Warning</option>
+                                <option value="service_down">Service Down</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Action</label>
+                            <select id="actionAction" name="action" required
+                                    class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <option value="">Select action</option>
+                                <option value="disable_client">Disable Client</option>
+                                <option value="extend_client">Extend Client</option>
+                                <option value="restart_service">Restart Service</option>
+                                <option value="send_notification">Send Notification</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center">
+                        <input type="checkbox" id="actionEnabled" name="enabled" 
+                               class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
+                        <label for="actionEnabled" class="ml-2 block text-sm text-gray-700">
+                            Enable this auto-action
+                        </label>
+                    </div>
+
+                    <div class="flex justify-end space-x-2">
+                        <button type="button" id="cancelAutoAction" 
+                                class="px-4 py-2 text-gray-600 hover:text-gray-800">
+                            Cancel
+                        </button>
+                        <button type="submit" 
+                                class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg">
+                            Save
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            loadTelegramStatus();
+            loadNotificationSettings();
+            loadAutoActions();
+            
+            // Event listeners
+            document.getElementById('telegramConfigForm').addEventListener('submit', saveTelegramConfig);
+            document.getElementById('testTelegramBtn').addEventListener('click', testTelegram);
+            document.getElementById('notificationSettingsForm').addEventListener('submit', saveNotificationSettings);
+            document.getElementById('addAutoActionBtn').addEventListener('click', showAutoActionModal);
+            document.getElementById('closeAutoActionModal').addEventListener('click', hideAutoActionModal);
+            document.getElementById('cancelAutoAction').addEventListener('click', hideAutoActionModal);
+            document.getElementById('autoActionForm').addEventListener('submit', saveAutoAction);
+        });
+    </script>
+</body>
+</html>

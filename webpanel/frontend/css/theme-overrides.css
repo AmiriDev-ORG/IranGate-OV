@@ -1,0 +1,1096 @@
+/* IranGate Comprehensive Theme Overrides */
+/* This file overrides ALL visual elements with theme-specific styles */
+
+/* Global Theme Application */
+.theme-eye-of-sea,
+.theme-capitan,
+.theme-dragon,
+.theme-ocean,
+.theme-forest {
+    /* Override all background colors */
+    --tw-bg-opacity: 1;
+    --tw-text-opacity: 1;
+    --tw-border-opacity: 1;
+}
+
+/* CRITICAL: Body Background Override */
+.theme-eye-of-sea body,
+.theme-capitan body,
+.theme-dragon body,
+.theme-ocean body,
+.theme-forest body {
+    background: var(--primary-bg) !important;
+    color: var(--text-primary) !important;
+}
+
+/* Main Content Override */
+.theme-eye-of-sea .main-content,
+.theme-capitan .main-content,
+.theme-dragon .main-content,
+.theme-ocean .main-content,
+.theme-forest .main-content {
+    background: var(--primary-bg) !important;
+    color: var(--text-primary) !important;
+}
+
+/* Sidebar Complete Override - Maximum Specificity */
+.theme-eye-of-sea .sidebar,
+.theme-capitan .sidebar,
+.theme-dragon .sidebar,
+.theme-ocean .sidebar,
+.theme-forest .sidebar {
+    background: var(--sidebar-bg) !important;
+    border-right-color: var(--sidebar-border) !important;
+}
+
+/* Sidebar Header Override */
+.theme-eye-of-sea .sidebar .sidebar-header,
+.theme-capitan .sidebar .sidebar-header,
+.theme-dragon .sidebar .sidebar-header,
+.theme-ocean .sidebar .sidebar-header,
+.theme-forest .sidebar .sidebar-header {
+    background: var(--tertiary-bg) !important;
+    border-bottom-color: var(--sidebar-border) !important;
+}
+
+/* Sidebar Scrollbar Override */
+.theme-eye-of-sea .sidebar::-webkit-scrollbar-thumb,
+.theme-capitan .sidebar::-webkit-scrollbar-thumb,
+.theme-dragon .sidebar::-webkit-scrollbar-thumb,
+.theme-ocean .sidebar::-webkit-scrollbar-thumb,
+.theme-forest .sidebar::-webkit-scrollbar-thumb {
+    background: var(--accent-color) !important;
+}
+
+/* Sidebar Logo Text Override - Fix Iran Gate text */
+.theme-eye-of-sea .sidebar-logo-text,
+.theme-capitan .sidebar-logo-text,
+.theme-dragon .sidebar-logo-text,
+.theme-ocean .sidebar-logo-text,
+.theme-forest .sidebar-logo-text {
+    background: none !important;
+    -webkit-background-clip: unset !important;
+    -webkit-text-fill-color: unset !important;
+    background-clip: unset !important;
+    color: var(--text-primary) !important;
+}
+
+/* Sidebar User Text Override */
+.theme-eye-of-sea .sidebar-user,
+.theme-capitan .sidebar-user,
+.theme-dragon .sidebar-user,
+.theme-ocean .sidebar-user,
+.theme-forest .sidebar-user {
+    color: var(--text-secondary) !important;
+}
+
+.theme-eye-of-sea .sidebar-user span,
+.theme-capitan .sidebar-user span,
+.theme-dragon .sidebar-user span,
+.theme-ocean .sidebar-user span,
+.theme-forest .sidebar-user span {
+    color: var(--text-primary) !important;
+}
+
+.theme-eye-of-sea .sidebar-header,
+.theme-capitan .sidebar-header,
+.theme-dragon .sidebar-header,
+.theme-ocean .sidebar-header,
+.theme-forest .sidebar-header {
+    background: var(--tertiary-bg) !important;
+    border-bottom-color: var(--sidebar-border) !important;
+}
+
+.theme-eye-of-sea .sidebar-logo-icon,
+.theme-capitan .sidebar-logo-icon,
+.theme-dragon .sidebar-logo-icon,
+.theme-ocean .sidebar-logo-icon,
+.theme-forest .sidebar-logo-icon {
+    background: var(--button-bg) !important;
+}
+
+/* Sidebar Menu Items Override - Maximum Specificity */
+.theme-eye-of-sea .sidebar .menu-item,
+.theme-capitan .sidebar .menu-item,
+.theme-dragon .sidebar .menu-item,
+.theme-ocean .sidebar .menu-item,
+.theme-forest .sidebar .menu-item {
+    color: var(--text-secondary) !important;
+    background: var(--secondary-bg) !important;
+}
+
+/* Override hardcoded menu item backgrounds from sidebar.css */
+.theme-capitan .sidebar .menu-item,
+.theme-dragon .sidebar .menu-item,
+.theme-ocean .sidebar .menu-item,
+.theme-forest .sidebar .menu-item {
+    background: var(--secondary-bg) !important;
+}
+
+/* Menu Section Titles Override */
+.theme-eye-of-sea .sidebar .menu-section-title,
+.theme-capitan .sidebar .menu-section-title,
+.theme-dragon .sidebar .menu-section-title,
+.theme-ocean .sidebar .menu-section-title,
+.theme-forest .sidebar .menu-section-title {
+    color: var(--text-muted) !important;
+}
+
+/* Menu Item Pseudo-elements - Maximum Specificity */
+.theme-eye-of-sea .sidebar .menu-item::before,
+.theme-capitan .sidebar .menu-item::before,
+.theme-dragon .sidebar .menu-item::before,
+.theme-ocean .sidebar .menu-item::before,
+.theme-forest .sidebar .menu-item::before {
+    background: var(--accent-color) !important;
+}
+
+/* Menu Item Hover States - Maximum Specificity */
+.theme-eye-of-sea .sidebar .menu-item:hover,
+.theme-capitan .sidebar .menu-item:hover,
+.theme-dragon .sidebar .menu-item:hover,
+.theme-ocean .sidebar .menu-item:hover,
+.theme-forest .sidebar .menu-item:hover {
+    background: var(--hover-bg) !important;
+    color: var(--text-primary) !important;
+}
+
+/* Force menu item background changes for all themes */
+.theme-capitan .sidebar .menu-item,
+.theme-dragon .sidebar .menu-item,
+.theme-ocean .sidebar .menu-item,
+.theme-forest .sidebar .menu-item {
+    background: var(--secondary-bg) !important;
+}
+
+/* Override any remaining hardcoded backgrounds */
+.theme-capitan .sidebar .menu-item,
+.theme-dragon .sidebar .menu-item,
+.theme-ocean .sidebar .menu-item,
+.theme-forest .sidebar .menu-item {
+    background: var(--secondary-bg) !important;
+    background-color: var(--secondary-bg) !important;
+}
+
+/* Force override ALL hardcoded sidebar styles */
+.theme-capitan .sidebar,
+.theme-dragon .sidebar,
+.theme-ocean .sidebar,
+.theme-forest .sidebar {
+    background: var(--sidebar-bg) !important;
+    border-right-color: var(--sidebar-border) !important;
+}
+
+/* Override section titles that are not changing */
+.theme-capitan .sidebar .menu-section-title,
+.theme-dragon .sidebar .menu-section-title,
+.theme-ocean .sidebar .menu-section-title,
+.theme-forest .sidebar .menu-section-title {
+    color: var(--text-muted) !important;
+    background: transparent !important;
+}
+
+/* Override active menu item backgrounds */
+.theme-capitan .sidebar .menu-item.active,
+.theme-dragon .sidebar .menu-item.active,
+.theme-ocean .sidebar .menu-item.active,
+.theme-forest .sidebar .menu-item.active {
+    background: var(--accent-color) !important;
+    color: var(--primary-bg) !important;
+}
+
+/* Override sidebar border colors */
+.theme-capitan .sidebar,
+.theme-dragon .sidebar,
+.theme-ocean .sidebar,
+.theme-forest .sidebar {
+    border-right: 1px solid var(--sidebar-border) !important;
+}
+
+/* Override scrollbar colors */
+.theme-capitan .sidebar::-webkit-scrollbar-thumb,
+.theme-dragon .sidebar::-webkit-scrollbar-thumb,
+.theme-ocean .sidebar::-webkit-scrollbar-thumb,
+.theme-forest .sidebar::-webkit-scrollbar-thumb {
+    background: var(--accent-color) !important;
+}
+
+/* CRITICAL: Override hardcoded sidebar.css styles with maximum specificity */
+.theme-capitan .sidebar .menu-item,
+.theme-dragon .sidebar .menu-item,
+.theme-ocean .sidebar .menu-item,
+.theme-forest .sidebar .menu-item {
+    background: var(--secondary-bg) !important;
+    background-color: var(--secondary-bg) !important;
+    color: var(--text-secondary) !important;
+}
+
+/* Override the hardcoded rgba backgrounds from sidebar.css */
+.theme-capitan .sidebar .menu-item,
+.theme-dragon .sidebar .menu-item,
+.theme-ocean .sidebar .menu-item,
+.theme-forest .sidebar .menu-item {
+    background: var(--secondary-bg) !important;
+    background-color: var(--secondary-bg) !important;
+}
+
+/* Override active states that are stuck on orange */
+.theme-capitan .sidebar .menu-item.active,
+.theme-dragon .sidebar .menu-item.active,
+.theme-ocean .sidebar .menu-item.active,
+.theme-forest .sidebar .menu-item.active {
+    background: var(--accent-color) !important;
+    background-color: var(--accent-color) !important;
+    color: var(--primary-bg) !important;
+}
+
+/* Override hover states */
+.theme-capitan .sidebar .menu-item:hover,
+.theme-dragon .sidebar .menu-item:hover,
+.theme-ocean .sidebar .menu-item:hover,
+.theme-forest .sidebar .menu-item:hover {
+    background: var(--hover-bg) !important;
+    background-color: var(--hover-bg) !important;
+    color: var(--text-primary) !important;
+}
+
+.theme-eye-of-sea .sidebar .menu-item:hover::before,
+.theme-capitan .sidebar .menu-item:hover::before,
+.theme-dragon .sidebar .menu-item:hover::before,
+.theme-ocean .sidebar .menu-item:hover::before,
+.theme-forest .sidebar .menu-item:hover::before {
+    transform: scaleY(1) !important;
+}
+
+/* Menu Item Active States - Maximum Specificity */
+.theme-eye-of-sea .sidebar .menu-item.active,
+.theme-capitan .sidebar .menu-item.active,
+.theme-dragon .sidebar .menu-item.active,
+.theme-ocean .sidebar .menu-item.active,
+.theme-forest .sidebar .menu-item.active {
+    background: var(--accent-color) !important;
+    color: var(--primary-bg) !important;
+}
+
+.theme-eye-of-sea .sidebar .menu-item.active::before,
+.theme-capitan .sidebar .menu-item.active::before,
+.theme-dragon .sidebar .menu-item.active::before,
+.theme-ocean .sidebar .menu-item.active::before,
+.theme-forest .sidebar .menu-item.active::before {
+    transform: scaleY(1) !important;
+}
+
+/* Coming Soon Menu Item Override */
+.theme-eye-of-sea .sidebar .menu-item.coming-soon,
+.theme-capitan .sidebar .menu-item.coming-soon,
+.theme-dragon .sidebar .menu-item.coming-soon,
+.theme-ocean .sidebar .menu-item.coming-soon,
+.theme-forest .sidebar .menu-item.coming-soon {
+    color: var(--text-secondary) !important;
+    background: transparent !important;
+    opacity: 1 !important;
+}
+
+.theme-eye-of-sea .sidebar .menu-item.coming-soon:hover,
+.theme-capitan .sidebar .menu-item.coming-soon:hover,
+.theme-dragon .sidebar .menu-item.coming-soon:hover,
+.theme-ocean .sidebar .menu-item.coming-soon:hover,
+.theme-forest .sidebar .menu-item.coming-soon:hover {
+    background: var(--hover-bg) !important;
+    color: var(--text-primary) !important;
+    opacity: 1 !important;
+}
+
+/* Ensure menu item text is visible - Maximum Specificity */
+.theme-eye-of-sea .sidebar .menu-item span,
+.theme-capitan .sidebar .menu-item span,
+.theme-dragon .sidebar .menu-item span,
+.theme-ocean .sidebar .menu-item span,
+.theme-forest .sidebar .menu-item span {
+    color: inherit !important;
+    display: inline !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+/* Fix menu item display - Maximum Specificity */
+.theme-eye-of-sea .sidebar .menu-item,
+.theme-capitan .sidebar .menu-item,
+.theme-dragon .sidebar .menu-item,
+.theme-ocean .sidebar .menu-item,
+.theme-forest .sidebar .menu-item {
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.75rem !important;
+}
+
+.theme-eye-of-sea .sidebar-nav-item,
+.theme-capitan .sidebar-nav-item,
+.theme-dragon .sidebar-nav-item,
+.theme-ocean .sidebar-nav-item,
+.theme-forest .sidebar-nav-item {
+    color: var(--text-secondary) !important;
+}
+
+.theme-eye-of-sea .sidebar-nav-item:hover,
+.theme-capitan .sidebar-nav-item:hover,
+.theme-dragon .sidebar-nav-item:hover,
+.theme-ocean .sidebar-nav-item:hover,
+.theme-forest .sidebar-nav-item:hover {
+    background: var(--hover-bg) !important;
+    color: var(--text-primary) !important;
+}
+
+.theme-eye-of-sea .sidebar-nav-item.active,
+.theme-capitan .sidebar-nav-item.active,
+.theme-dragon .sidebar-nav-item.active,
+.theme-ocean .sidebar-nav-item.active,
+.theme-forest .sidebar-nav-item.active {
+    background: var(--accent-color) !important;
+    color: var(--primary-bg) !important;
+}
+
+/* Coming Soon Badge Override - Maximum Specificity */
+.theme-eye-of-sea .sidebar .menu-badge,
+.theme-capitan .sidebar .menu-badge,
+.theme-dragon .sidebar .menu-badge,
+.theme-ocean .sidebar .menu-badge,
+.theme-forest .sidebar .menu-badge,
+.theme-eye-of-sea .sidebar .badge,
+.theme-capitan .sidebar .badge,
+.theme-dragon .sidebar .badge,
+.theme-ocean .sidebar .badge,
+.theme-forest .sidebar .badge,
+.theme-eye-of-sea .sidebar .badge.beta,
+.theme-capitan .sidebar .badge.beta,
+.theme-dragon .sidebar .badge.beta,
+.theme-ocean .sidebar .badge.beta,
+.theme-forest .sidebar .badge.beta {
+    background: var(--warning) !important;
+    color: var(--primary-bg) !important;
+}
+
+/* Logout Button Override - Maximum Specificity */
+.theme-eye-of-sea .sidebar .logout-btn,
+.theme-capitan .sidebar .logout-btn,
+.theme-dragon .sidebar .logout-btn,
+.theme-ocean .sidebar .logout-btn,
+.theme-forest .sidebar .logout-btn {
+    background: var(--button-bg) !important;
+    color: var(--primary-bg) !important;
+    border: 1px solid var(--accent-color) !important;
+    box-shadow: none !important;
+}
+
+.theme-eye-of-sea .sidebar .logout-btn:hover,
+.theme-capitan .sidebar .logout-btn:hover,
+.theme-dragon .sidebar .logout-btn:hover,
+.theme-ocean .sidebar .logout-btn:hover,
+.theme-forest .sidebar .logout-btn:hover {
+    background: var(--button-hover) !important;
+    color: var(--primary-bg) !important;
+    box-shadow: 0 0 20px rgba(100, 255, 218, 0.3) !important;
+}
+
+/* Additional Logout Button Override for Hardcoded Styles */
+.theme-eye-of-sea .sidebar-footer .logout-btn,
+.theme-capitan .sidebar-footer .logout-btn,
+.theme-dragon .sidebar-footer .logout-btn,
+.theme-ocean .sidebar-footer .logout-btn,
+.theme-forest .sidebar-footer .logout-btn {
+    background: var(--button-bg) !important;
+    color: var(--primary-bg) !important;
+    border: 1px solid var(--accent-color) !important;
+}
+
+/* Complete Button Overrides */
+.theme-eye-of-sea .bg-blue-600,
+.theme-capitan .bg-blue-600,
+.theme-dragon .bg-blue-600,
+.theme-ocean .bg-blue-600,
+.theme-forest .bg-blue-600 {
+    background: var(--button-bg) !important;
+    color: var(--primary-bg) !important;
+}
+
+.theme-eye-of-sea .bg-blue-600:hover,
+.theme-capitan .bg-blue-600:hover,
+.theme-dragon .bg-blue-600:hover,
+.theme-ocean .bg-blue-600:hover,
+.theme-forest .bg-blue-600:hover {
+    background: var(--button-hover) !important;
+}
+
+.theme-eye-of-sea .bg-purple-600,
+.theme-capitan .bg-purple-600,
+.theme-dragon .bg-purple-600,
+.theme-ocean .bg-purple-600,
+.theme-forest .bg-purple-600 {
+    background: var(--button-bg) !important;
+    color: var(--primary-bg) !important;
+}
+
+.theme-eye-of-sea .bg-purple-600:hover,
+.theme-capitan .bg-purple-600:hover,
+.theme-dragon .bg-purple-600:hover,
+.theme-ocean .bg-purple-600:hover,
+.theme-forest .bg-purple-600:hover {
+    background: var(--button-hover) !important;
+}
+
+.theme-eye-of-sea .bg-gray-500,
+.theme-capitan .bg-gray-500,
+.theme-dragon .bg-gray-500,
+.theme-ocean .bg-gray-500,
+.theme-forest .bg-gray-500 {
+    background: var(--tertiary-bg) !important;
+    color: var(--text-primary) !important;
+}
+
+.theme-eye-of-sea .bg-gray-500:hover,
+.theme-capitan .bg-gray-500:hover,
+.theme-dragon .bg-gray-500:hover,
+.theme-ocean .bg-gray-500:hover,
+.theme-forest .bg-gray-500:hover {
+    background: var(--hover-bg) !important;
+}
+
+/* Card and Container Overrides */
+.theme-eye-of-sea .bg-white,
+.theme-capitan .bg-white,
+.theme-dragon .bg-white,
+.theme-ocean .bg-white,
+.theme-forest .bg-white {
+    background: var(--card-bg) !important;
+    color: var(--text-primary) !important;
+    border-color: var(--border-color) !important;
+}
+
+.theme-eye-of-sea .bg-gray-50,
+.theme-capitan .bg-gray-50,
+.theme-dragon .bg-gray-50,
+.theme-ocean .bg-gray-50,
+.theme-forest .bg-gray-50 {
+    background: var(--secondary-bg) !important;
+    color: var(--text-primary) !important;
+}
+
+.theme-eye-of-sea .bg-gray-100,
+.theme-capitan .bg-gray-100,
+.theme-dragon .bg-gray-100,
+.theme-ocean .bg-gray-100,
+.theme-forest .bg-gray-100 {
+    background: var(--tertiary-bg) !important;
+    color: var(--text-primary) !important;
+}
+
+/* Text Color Overrides */
+.theme-eye-of-sea .text-gray-800,
+.theme-capitan .text-gray-800,
+.theme-dragon .text-gray-800,
+.theme-ocean .text-gray-800,
+.theme-forest .text-gray-800 {
+    color: var(--text-primary) !important;
+}
+
+.theme-eye-of-sea .text-gray-600,
+.theme-capitan .text-gray-600,
+.theme-dragon .text-gray-600,
+.theme-ocean .text-gray-600,
+.theme-forest .text-gray-600 {
+    color: var(--text-secondary) !important;
+}
+
+.theme-eye-of-sea .text-gray-700,
+.theme-capitan .text-gray-700,
+.theme-dragon .text-gray-700,
+.theme-ocean .text-gray-700,
+.theme-forest .text-gray-700 {
+    color: var(--text-secondary) !important;
+}
+
+.theme-eye-of-sea .text-gray-500,
+.theme-capitan .text-gray-500,
+.theme-dragon .text-gray-500,
+.theme-ocean .text-gray-500,
+.theme-forest .text-gray-500 {
+    color: var(--text-muted) !important;
+}
+
+/* Border Overrides */
+.theme-eye-of-sea .border-gray-300,
+.theme-capitan .border-gray-300,
+.theme-dragon .border-gray-300,
+.theme-ocean .border-gray-300,
+.theme-forest .border-gray-300 {
+    border-color: var(--border-color) !important;
+}
+
+.theme-eye-of-sea .border-gray-200,
+.theme-capitan .border-gray-200,
+.theme-dragon .border-gray-200,
+.theme-ocean .border-gray-200,
+.theme-forest .border-gray-200 {
+    border-color: var(--border-color) !important;
+}
+
+/* Input Field Overrides */
+.theme-eye-of-sea input,
+.theme-capitan input,
+.theme-dragon input,
+.theme-ocean input,
+.theme-forest input {
+    background: var(--tertiary-bg) !important;
+    color: var(--text-primary) !important;
+    border-color: var(--border-color) !important;
+}
+
+.theme-eye-of-sea input:focus,
+.theme-capitan input:focus,
+.theme-dragon input:focus,
+.theme-ocean input:focus,
+.theme-forest input:focus {
+    border-color: var(--accent-color) !important;
+    box-shadow: 0 0 0 2px rgba(100, 255, 218, 0.2) !important;
+}
+
+.theme-eye-of-sea textarea,
+.theme-capitan textarea,
+.theme-dragon textarea,
+.theme-ocean textarea,
+.theme-forest textarea {
+    background: var(--tertiary-bg) !important;
+    color: var(--text-primary) !important;
+    border-color: var(--border-color) !important;
+}
+
+.theme-eye-of-sea textarea:focus,
+.theme-capitan textarea:focus,
+.theme-dragon textarea:focus,
+.theme-ocean textarea:focus,
+.theme-forest textarea:focus {
+    border-color: var(--accent-color) !important;
+    box-shadow: 0 0 0 2px rgba(100, 255, 218, 0.2) !important;
+}
+
+/* Table Overrides */
+.theme-eye-of-sea table,
+.theme-capitan table,
+.theme-dragon table,
+.theme-ocean table,
+.theme-forest table {
+    background: var(--card-bg) !important;
+    color: var(--text-primary) !important;
+}
+
+.theme-eye-of-sea th,
+.theme-capitan th,
+.theme-dragon th,
+.theme-ocean th,
+.theme-forest th {
+    background: var(--secondary-bg) !important;
+    color: var(--text-primary) !important;
+    border-color: var(--border-color) !important;
+}
+
+.theme-eye-of-sea td,
+.theme-capitan td,
+.theme-dragon td,
+.theme-ocean td,
+.theme-forest td {
+    border-color: var(--border-color) !important;
+    color: var(--text-secondary) !important;
+}
+
+/* Progress Bar Overrides */
+.theme-eye-of-sea .bg-blue-500,
+.theme-capitan .bg-blue-500,
+.theme-dragon .bg-blue-500,
+.theme-ocean .bg-blue-500,
+.theme-forest .bg-blue-500 {
+    background: var(--accent-color) !important;
+}
+
+/* Status Indicators */
+.theme-eye-of-sea .bg-green-500,
+.theme-capitan .bg-green-500,
+.theme-dragon .bg-green-500,
+.theme-ocean .bg-green-500,
+.theme-forest .bg-green-500 {
+    background: var(--success) !important;
+}
+
+.theme-eye-of-sea .bg-red-500,
+.theme-capitan .bg-red-500,
+.theme-dragon .bg-red-500,
+.theme-ocean .bg-red-500,
+.theme-forest .bg-red-500 {
+    background: var(--error) !important;
+}
+
+.theme-eye-of-sea .bg-yellow-500,
+.theme-capitan .bg-yellow-500,
+.theme-dragon .bg-yellow-500,
+.theme-ocean .bg-yellow-500,
+.theme-forest .bg-yellow-500 {
+    background: var(--warning) !important;
+}
+
+/* Alert Boxes */
+.theme-eye-of-sea .bg-blue-50,
+.theme-capitan .bg-blue-50,
+.theme-dragon .bg-blue-50,
+.theme-ocean .bg-blue-50,
+.theme-forest .bg-blue-50 {
+    background: var(--secondary-bg) !important;
+    border-color: var(--accent-color) !important;
+    color: var(--text-primary) !important;
+}
+
+/* Chart and Graph Overrides */
+.theme-eye-of-sea canvas,
+.theme-capitan canvas,
+.theme-dragon canvas,
+.theme-ocean canvas,
+.theme-forest canvas {
+    background: var(--card-bg) !important;
+}
+
+/* Scrollbar Overrides */
+.theme-eye-of-sea ::-webkit-scrollbar-thumb,
+.theme-capitan ::-webkit-scrollbar-thumb,
+.theme-dragon ::-webkit-scrollbar-thumb,
+.theme-ocean ::-webkit-scrollbar-thumb,
+.theme-forest ::-webkit-scrollbar-thumb {
+    background: var(--accent-color) !important;
+}
+
+.theme-eye-of-sea ::-webkit-scrollbar-track,
+.theme-capitan ::-webkit-scrollbar-track,
+.theme-dragon ::-webkit-scrollbar-track,
+.theme-ocean ::-webkit-scrollbar-track,
+.theme-forest ::-webkit-scrollbar-track {
+    background: var(--secondary-bg) !important;
+}
+
+/* Animation and Effect Overrides */
+.theme-eye-of-sea .particle,
+.theme-capitan .particle,
+.theme-dragon .particle,
+.theme-ocean .particle,
+.theme-forest .particle {
+    background: var(--accent-color) !important;
+}
+
+/* Loading Spinner Overrides */
+.theme-eye-of-sea .border-blue-600,
+.theme-capitan .border-blue-600,
+.theme-dragon .border-blue-600,
+.theme-ocean .border-blue-600,
+.theme-forest .border-blue-600 {
+    border-color: var(--accent-color) !important;
+}
+
+/* Code Block Overrides */
+.theme-eye-of-sea .bg-black,
+.theme-capitan .bg-black,
+.theme-dragon .bg-black,
+.theme-ocean .bg-black,
+.theme-forest .bg-black {
+    background: var(--primary-bg) !important;
+    color: var(--text-primary) !important;
+}
+
+.theme-eye-of-sea .text-green-400,
+.theme-capitan .text-green-400,
+.theme-dragon .text-green-400,
+.theme-ocean .text-green-400,
+.theme-forest .text-green-400 {
+    color: var(--success) !important;
+}
+
+/* Hover Effects */
+.theme-eye-of-sea .hover\:bg-gray-300:hover,
+.theme-capitan .hover\:bg-gray-300:hover,
+.theme-dragon .hover\:bg-gray-300:hover,
+.theme-ocean .hover\:bg-gray-300:hover,
+.theme-forest .hover\:bg-gray-300:hover {
+    background: var(--hover-bg) !important;
+}
+
+/* Focus States */
+.theme-eye-of-sea .focus\:ring-purple-500:focus,
+.theme-capitan .focus\:ring-purple-500:focus,
+.theme-dragon .focus\:ring-purple-500:focus,
+.theme-ocean .focus\:ring-purple-500:focus,
+.theme-forest .focus\:ring-purple-500:focus {
+    box-shadow: 0 0 0 2px var(--accent-color) !important;
+}
+
+/* Shadow Overrides */
+.theme-eye-of-sea .shadow-lg,
+.theme-capitan .shadow-lg,
+.theme-dragon .shadow-lg,
+.theme-ocean .shadow-lg,
+.theme-forest .shadow-lg {
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* Gradient Overrides */
+.theme-eye-of-sea .bg-gradient-to-r,
+.theme-capitan .bg-gradient-to-r,
+.theme-dragon .bg-gradient-to-r,
+.theme-ocean .bg-gradient-to-r,
+.theme-forest .bg-gradient-to-r {
+    background: var(--button-bg) !important;
+}
+
+/* AI Core Page Theme Overrides */
+.theme-eye-of-sea .ai-core-card,
+.theme-capitan .ai-core-card,
+.theme-dragon .ai-core-card,
+.theme-ocean .ai-core-card,
+.theme-forest .ai-core-card {
+    background: var(--card-bg) !important;
+    color: var(--text-primary) !important;
+    border-color: var(--border-color) !important;
+}
+
+.theme-eye-of-sea .ai-core-card h3,
+.theme-capitan .ai-core-card h3,
+.theme-dragon .ai-core-card h3,
+.theme-ocean .ai-core-card h3,
+.theme-forest .ai-core-card h3 {
+    color: var(--text-primary) !important;
+}
+
+.theme-eye-of-sea .ai-core-card p,
+.theme-capitan .ai-core-card p,
+.theme-dragon .ai-core-card p,
+.theme-ocean .ai-core-card p,
+.theme-forest .ai-core-card p {
+    color: var(--text-secondary) !important;
+}
+
+/* AI Core Feature Cards */
+.theme-eye-of-sea .feature-card,
+.theme-capitan .feature-card,
+.theme-dragon .feature-card,
+.theme-ocean .feature-card,
+.theme-forest .feature-card {
+    background: var(--card-bg) !important;
+    color: var(--text-primary) !important;
+    border-color: var(--border-color) !important;
+}
+
+.theme-eye-of-sea .feature-card h4,
+.theme-capitan .feature-card h4,
+.theme-dragon .feature-card h4,
+.theme-ocean .feature-card h4,
+.theme-forest .feature-card h4 {
+    color: var(--text-primary) !important;
+}
+
+.theme-eye-of-sea .feature-card p,
+.theme-capitan .feature-card p,
+.theme-dragon .feature-card p,
+.theme-ocean .feature-card p,
+.theme-forest .feature-card p {
+    color: var(--text-secondary) !important;
+}
+
+/* AI Core Icons */
+.theme-eye-of-sea .ai-icon,
+.theme-capitan .ai-icon,
+.theme-dragon .ai-icon,
+.theme-ocean .ai-icon,
+.theme-forest .ai-icon {
+    color: var(--accent-color) !important;
+}
+
+/* Override any hardcoded card backgrounds */
+.theme-eye-of-sea .grid .bg-white,
+.theme-capitan .grid .bg-white,
+.theme-dragon .grid .bg-white,
+.theme-ocean .grid .bg-white,
+.theme-forest .grid .bg-white {
+    background: var(--card-bg) !important;
+    color: var(--text-primary) !important;
+}
+
+/* AI Core specific text overrides */
+.theme-eye-of-sea .text-orange-500,
+.theme-capitan .text-orange-500,
+.theme-dragon .text-orange-500,
+.theme-ocean .text-orange-500,
+.theme-forest .text-orange-500 {
+    color: var(--text-secondary) !important;
+}
+
+.theme-eye-of-sea .text-cyan-500,
+.theme-capitan .text-cyan-500,
+.theme-dragon .text-cyan-500,
+.theme-ocean .text-cyan-500,
+.theme-forest .text-cyan-500 {
+    color: var(--accent-color) !important;
+}
+
+/* COMPREHENSIVE ELEMENT OVERRIDES */
+/* Override ALL possible hardcoded styles */
+.theme-eye-of-sea *,
+.theme-capitan *,
+.theme-dragon *,
+.theme-ocean *,
+.theme-forest * {
+    /* Force theme variables on all elements */
+    background-color: inherit !important;
+    color: inherit !important;
+}
+
+/* Specific overrides for common hardcoded classes */
+.theme-eye-of-sea .bg-white,
+.theme-capitan .bg-white,
+.theme-dragon .bg-white,
+.theme-ocean .bg-white,
+.theme-forest .bg-white {
+    background: var(--card-bg) !important;
+    color: var(--text-primary) !important;
+}
+
+.theme-eye-of-sea .text-gray-800,
+.theme-capitan .text-gray-800,
+.theme-dragon .text-gray-800,
+.theme-ocean .text-gray-800,
+.theme-forest .text-gray-800 {
+    color: var(--text-primary) !important;
+}
+
+.theme-eye-of-sea .text-gray-600,
+.theme-capitan .text-gray-600,
+.theme-dragon .text-gray-600,
+.theme-ocean .text-gray-600,
+.theme-forest .text-gray-600 {
+    color: var(--text-secondary) !important;
+}
+
+.theme-eye-of-sea .text-gray-500,
+.theme-capitan .text-gray-500,
+.theme-dragon .text-gray-500,
+.theme-ocean .text-gray-500,
+.theme-forest .text-gray-500 {
+    color: var(--text-muted) !important;
+}
+
+/* Override any remaining hardcoded backgrounds */
+.theme-eye-of-sea [style*="background"],
+.theme-capitan [style*="background"],
+.theme-dragon [style*="background"],
+.theme-ocean [style*="background"],
+.theme-forest [style*="background"] {
+    background: var(--primary-bg) !important;
+}
+
+/* Force sidebar menu items to use theme colors */
+.theme-eye-of-sea .menu-item,
+.theme-capitan .menu-item,
+.theme-dragon .menu-item,
+.theme-ocean .menu-item,
+.theme-forest .menu-item {
+    background: var(--secondary-bg) !important;
+    color: var(--text-secondary) !important;
+}
+
+.theme-eye-of-sea .menu-item:hover,
+.theme-capitan .menu-item:hover,
+.theme-dragon .menu-item:hover,
+.theme-ocean .menu-item:hover,
+.theme-forest .menu-item:hover {
+    background: var(--hover-bg) !important;
+    color: var(--text-primary) !important;
+}
+
+.theme-eye-of-sea .menu-item.active,
+.theme-capitan .menu-item.active,
+.theme-dragon .menu-item.active,
+.theme-ocean .menu-item.active,
+.theme-forest .menu-item.active {
+    background: var(--accent-color) !important;
+    color: var(--primary-bg) !important;
+}
+
+/* TOAST NOTIFICATION THEME OVERRIDES */
+/* Override toast notification backgrounds and colors */
+.theme-eye-of-sea .notification-toast,
+.theme-capitan .notification-toast,
+.theme-dragon .notification-toast,
+.theme-ocean .notification-toast,
+.theme-forest .notification-toast {
+    background: var(--card-bg) !important;
+    color: var(--text-primary) !important;
+    border: 1px solid var(--border-color) !important;
+}
+
+/* Success toast overrides */
+.theme-eye-of-sea .notification-toast .bg-green-600,
+.theme-capitan .notification-toast .bg-green-600,
+.theme-dragon .notification-toast .bg-green-600,
+.theme-ocean .notification-toast .bg-green-600,
+.theme-forest .notification-toast .bg-green-600 {
+    background: var(--success) !important;
+    color: var(--primary-bg) !important;
+}
+
+/* Error toast overrides */
+.theme-eye-of-sea .notification-toast .bg-red-600,
+.theme-capitan .notification-toast .bg-red-600,
+.theme-dragon .notification-toast .bg-red-600,
+.theme-ocean .notification-toast .bg-red-600,
+.theme-forest .notification-toast .bg-red-600 {
+    background: var(--error) !important;
+    color: var(--primary-bg) !important;
+}
+
+/* Warning toast overrides */
+.theme-eye-of-sea .notification-toast .bg-yellow-600,
+.theme-capitan .notification-toast .bg-yellow-600,
+.theme-dragon .notification-toast .bg-yellow-600,
+.theme-ocean .notification-toast .bg-yellow-600,
+.theme-forest .notification-toast .bg-yellow-600 {
+    background: var(--warning) !important;
+    color: var(--primary-bg) !important;
+}
+
+/* Info toast overrides */
+.theme-eye-of-sea .notification-toast .bg-blue-600,
+.theme-capitan .notification-toast .bg-blue-600,
+.theme-dragon .notification-toast .bg-blue-600,
+.theme-ocean .notification-toast .bg-blue-600,
+.theme-forest .notification-toast .bg-blue-600 {
+    background: var(--accent-color) !important;
+    color: var(--primary-bg) !important;
+}
+
+/* Simple toast overrides (from api.js) */
+.theme-eye-of-sea .bg-green-500,
+.theme-capitan .bg-green-500,
+.theme-dragon .bg-green-500,
+.theme-ocean .bg-green-500,
+.theme-forest .bg-green-500 {
+    background: var(--success) !important;
+    color: var(--primary-bg) !important;
+}
+
+.theme-eye-of-sea .bg-red-500,
+.theme-capitan .bg-red-500,
+.theme-dragon .bg-red-500,
+.theme-ocean .bg-red-500,
+.theme-forest .bg-red-500 {
+    background: var(--error) !important;
+    color: var(--primary-bg) !important;
+}
+
+.theme-eye-of-sea .bg-yellow-500,
+.theme-capitan .bg-yellow-500,
+.theme-dragon .bg-yellow-500,
+.theme-ocean .bg-yellow-500,
+.theme-forest .bg-yellow-500 {
+    background: var(--warning) !important;
+    color: var(--primary-bg) !important;
+}
+
+.theme-eye-of-sea .bg-blue-500,
+.theme-capitan .bg-blue-500,
+.theme-dragon .bg-blue-500,
+.theme-ocean .bg-blue-500,
+.theme-forest .bg-blue-500 {
+    background: var(--accent-color) !important;
+    color: var(--primary-bg) !important;
+}
+
+/* Toast text color overrides */
+.theme-eye-of-sea .notification-toast p,
+.theme-capitan .notification-toast p,
+.theme-dragon .notification-toast p,
+.theme-ocean .notification-toast p,
+.theme-forest .notification-toast p {
+    color: var(--text-primary) !important;
+}
+
+/* Toast progress bar overrides */
+.theme-eye-of-sea .notification-toast .bg-white,
+.theme-capitan .notification-toast .bg-white,
+.theme-dragon .notification-toast .bg-white,
+.theme-ocean .notification-toast .bg-white,
+.theme-forest .notification-toast .bg-white {
+    background: var(--primary-bg) !important;
+}
+
+/* WELCOME MESSAGE THEME OVERRIDES */
+/* Fix the welcome message text color to properly sync with theme */
+.theme-eye-of-sea h1,
+.theme-capitan h1,
+.theme-dragon h1,
+.theme-ocean h1,
+.theme-forest h1 {
+    color: var(--text-primary) !important;
+}
+
+/* Specific override for welcome message heading */
+.theme-eye-of-sea .main-content h1,
+.theme-capitan .main-content h1,
+.theme-dragon .main-content h1,
+.theme-ocean .main-content h1,
+.theme-forest .main-content h1 {
+    color: var(--text-primary) !important;
+}
+
+/* Override the hardcoded text-gray-800 class in welcome message */
+.theme-eye-of-sea .text-gray-800,
+.theme-capitan .text-gray-800,
+.theme-dragon .text-gray-800,
+.theme-ocean .text-gray-800,
+.theme-forest .text-gray-800 {
+    color: var(--text-primary) !important;
+}
+
+/* Ensure username span also follows theme */
+.theme-eye-of-sea #username,
+.theme-capitan #username,
+.theme-dragon #username,
+.theme-ocean #username,
+.theme-forest #username {
+    color: var(--accent-color) !important;
+    background: transparent !important;
+    padding: 0 !important;
+    border-radius: 0 !important;
+    font-weight: bold !important;
+}
+
+/* Override any selection highlighting for username */
+.theme-eye-of-sea #username::selection,
+.theme-capitan #username::selection,
+.theme-dragon #username::selection,
+.theme-ocean #username::selection,
+.theme-forest #username::selection {
+    background: var(--accent-color) !important;
+    color: var(--primary-bg) !important;
+}
+
+/* Override text selection colors for the entire welcome message */
+.theme-eye-of-sea .main-content h1::selection,
+.theme-capitan .main-content h1::selection,
+.theme-dragon .main-content h1::selection,
+.theme-ocean .main-content h1::selection,
+.theme-forest .main-content h1::selection {
+    background: var(--accent-color) !important;
+    color: var(--primary-bg) !important;
+}
+
+/* Welcome message subtitle override */
+.theme-eye-of-sea .main-content p,
+.theme-capitan .main-content p,
+.theme-dragon .main-content p,
+.theme-ocean .main-content p,
+.theme-forest .main-content p {
+    color: var(--text-secondary) !important;
+}

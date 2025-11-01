@@ -1,0 +1,15 @@
+{
+  "server_ip": "0.0.0.0",
+  "server_port": 1194,
+  "protocol": "udp",
+  "cipher": "AES-256-GCM",
+  "mtu": 1412,
+  "dns": ["1.1.1.1", "8.8.8.8"],
+  "ipv6_enabled": false,
+  "auto_config_mode": "dynamic",
+  "backup_path": "/opt/irangate/database/backups/",
+  "log_level": 3,
+  "version": "1.0.0",
+  "install_date": "2025-10-07T12:00:00Z",
+  "last_backup": null
+}

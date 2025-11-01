@@ -1,0 +1,16 @@
+{
+  "server_ip": "91.107.182.251",
+  "server_domain": "",
+  "auto_detect_ip": true,
+  "last_updated": "2025-10-30T19:18:38Z",
+  "detected_ips": {
+    "primary": "91.107.182.251",
+    "public": "",
+    "local": ""
+  },
+  "settings": {
+    "use_domain": false,
+    "fallback_to_ip": true,
+    "update_interval": 300
+  }
+}

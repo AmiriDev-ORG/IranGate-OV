@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - IranGate</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="css/dark-theme.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="stylesheet" href="css/themes.css">
+    <link rel="stylesheet" href="css/theme-overrides.css">
+    <script src="js/particles.js"></script>
+    <script src="js/sidebar.js"></script>
+    <script src="js/theme-loader.js"></script>
+    <style>
+        .tab-button {
+            padding: 0.75rem 1.5rem;
+            border-bottom: 2px solid transparent;
+            color: #6b7280;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .tab-button:hover {
+            color: #9333ea;
+            border-bottom-color: #e5e7eb;
+        }
+        .tab-button.active {
+            color: #9333ea;
+            border-bottom-color: #9333ea;
+        }
+    </style>
+</head>
+<body>
+    <div class="main-content">
+    <!-- Navigation hidden -->
+    <nav class="bg-white shadow-lg" style="display:none;">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <span class="text-2xl font-bold text-purple-600">IranGate</span>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <a href="dashboard.html" class="text-gray-600 hover:text-purple-600">Dashboard</a>
+                    <a href="clients.html" class="text-gray-600 hover:text-purple-600">Clients</a>
+                    <a href="analytics.html" class="text-gray-600 hover:text-purple-600">Analytics</a>
+                    <a href="users.html" class="text-gray-600 hover:text-purple-600">Users</a>
+                    <a href="#" class="text-gray-600 hover:text-purple-600" onclick="showComingSoon('Inbound'); return false;">Inbound <span class="badge beta">💫 Coming Soon</span></a>
+                    <a href="settings.html" class="text-purple-600 font-medium">Settings</a>
+                    <a href="api-docs.html" class="text-gray-600 hover:text-purple-600">API</a>
+                    <button onclick="logout()" class="text-red-600 hover:text-red-700">Logout</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="max-w-4xl mx-auto px-4 py-8">
+        <h1 class="text-3xl font-bold text-gray-800 mb-8">Settings</h1>
+
+        <!-- Tabs -->
+        <div class="mb-6 border-b border-gray-200">
+            <nav class="-mb-px flex space-x-8">
+                <button onclick="showTab('admin')" id="tab-admin" class="tab-button active">
+                    Admin Settings
+                </button>
+                <button onclick="showTab('server')" id="tab-server" class="tab-button">
+                    Server Settings
+                </button>
+                <button onclick="showTab('theme')" id="tab-theme" class="tab-button">
+                    Theme
+                </button>
+                <button onclick="showTab('telegram')" id="tab-telegram" class="tab-button">
+                    Telegram Bot
+                </button>
+                <button onclick="showTab('backup')" id="tab-backup" class="tab-button">
+                    Backup & Restore
+                </button>
+                <button onclick="showTab('system')" id="tab-system" class="tab-button">
+                    System Info
+                </button>
+            </nav>
+        </div>
+
+        <!-- Admin Settings -->
+        <div id="content-admin" class="tab-content">
+        <div class="bg-white rounded-lg shadow p-6 mb-6">
+            <h2 class="text-xl font-semibold text-gray-800 mb-4">Admin Settings</h2>
+            <form id="passwordForm" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Current Password</label>
+                    <input type="password" id="oldPassword" required
+                           class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">New Password</label>
+                    <input type="password" id="newPassword" required
+                           class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Confirm New Password</label>
+                    <input type="password" id="confirmPassword" required
+                           class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500">
+                </div>
+                <button type="submit" class="bg-purple-600 hover:bg-purple-700 text-white px-6 py-2 rounded-lg">
+                    Change Password
+                </button>
+            </form>
+        </div>
+        </div>
+
+        <!-- Server Settings -->
+        <div id="content-server" class="tab-content hidden">
+        <div class="bg-white rounded-lg shadow p-6 mb-6">
+            <h2 class="text-xl font-semibold text-gray-800 mb-4">Server Settings</h2>
+            <form id="serverForm" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Server IP / Domain</label>
+                    <input type="text" id="serverIP" placeholder="your-server-ip-or-domain"
+                           class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500">
+                    <p class="text-xs text-gray-500 mt-1">This will be used as the 'remote' parameter in all client configs.</p>
+                </div>
+                <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg">
+                    Save Server Settings
+                </button>
+            </form>
+        </div>
+        </div>
+
+        <!-- Webpanel Theme -->
+        <div id="content-theme" class="tab-content hidden">
+        <div class="bg-white rounded-lg shadow p-6 mb-6">
+            <h2 class="text-xl font-semibold text-gray-800 mb-4">Webpanel Theme</h2>
+            <p class="text-sm text-gray-600 mb-4">Choose from our collection of beautiful themes or customize your own</p>
+            
+            <!-- Online Themes Link -->
+            <div class="mb-6">
+                <a href="https://github.com/amiridev-org/irangate-ov" target="_blank" class="theme-link">
+                    🌐 Get Online Themes
+                </a>
+                <p class="text-xs text-gray-500 mt-2">Download additional themes from our community repository</p>
+            </div>
+
+            <!-- Theme Selector -->
+            <div class="theme-switcher">
+                <div class="theme-option" data-theme="eye-of-sea">
+                    <div class="theme-preview eye-of-sea"></div>
+                    <div class="theme-name">Eye of Sea</div>
+                    <div class="theme-description">Default theme with navy blue and cyan accents</div>
+                </div>
+                
+                <div class="theme-option" data-theme="capitan">
+                    <div class="theme-preview capitan"></div>
+                    <div class="theme-name">Capitan</div>
+                    <div class="theme-description">Modern black and white minimalist design</div>
+                </div>
+                
+                <div class="theme-option" data-theme="dragon">
+                    <div class="theme-preview dragon"></div>
+                    <div class="theme-name">Dragon</div>
+                    <div class="theme-description">Bold red, orange, and black color scheme</div>
+                </div>
+                
+                <div class="theme-option" data-theme="ocean">
+                    <div class="theme-preview ocean"></div>
+                    <div class="theme-name">Ocean</div>
+                    <div class="theme-description">Calming blue and teal ocean-inspired theme</div>
+                </div>
+                
+                <div class="theme-option" data-theme="forest">
+                    <div class="theme-preview forest"></div>
+                    <div class="theme-name">Forest</div>
+                    <div class="theme-description">Natural green and earth tone theme</div>
+                </div>
+
+            </div>
+
+            <!-- Custom Theme Section -->
+            <div class="mt-6 pt-6 border-t border-gray-200">
+                <h3 class="text-lg font-semibold text-gray-800 mb-4">Custom Theme</h3>
+                <p class="text-sm text-gray-600 mb-4">Create your own theme with custom CSS and JavaScript</p>
+                <form id="themeForm" class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Custom CSS</label>
+                        <textarea id="customCSS" rows="8"
+                                  class="w-full px-4 py-2 border rounded-lg font-mono text-sm focus:outline-none focus:ring-2 focus:ring-purple-500"
+                                  placeholder="/* Enter your custom CSS here */"></textarea>
+                        <p class="text-xs text-gray-500 mt-1">Add custom styles to override default theme</p>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Custom JavaScript</label>
+                        <textarea id="customJS" rows="8"
+                                  class="w-full px-4 py-2 border rounded-lg font-mono text-sm focus:outline-none focus:ring-2 focus:ring-purple-500"
+                                  placeholder="// Enter your custom JavaScript here"></textarea>
+                        <p class="text-xs text-gray-500 mt-1">Add custom functionality (will be executed on page load)</p>
+                    </div>
+                    <div class="flex gap-4">
+                        <button type="submit" class="bg-purple-600 hover:bg-purple-700 text-white px-6 py-2 rounded-lg">
+                            Save Custom Theme
+                        </button>
+                        <button type="button" onclick="resetTheme()" class="bg-gray-500 hover:bg-gray-600 text-white px-6 py-2 rounded-lg">
+                            Reset to Default
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        </div>
+
+        <!-- Telegram Bot -->
+        <div id="content-telegram" class="tab-content hidden">
+        <div class="bg-white rounded-lg shadow p-6 mb-6">
+            <h2 class="text-xl font-semibold text-gray-800 mb-4">Telegram Bot</h2>
+            <form id="telegramForm" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Bot Token</label>
+                    <input type="text" id="botToken" placeholder="123456789:ABCdefGHIjklmNOpqRSTuvWXyz"
+                           class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Chat ID</label>
+                    <input type="text" id="chatID" placeholder="123456789"
+                           class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500">
+                </div>
+                <div class="flex items-center">
+                    <input type="checkbox" id="telegramEnabled" class="mr-2">
+                    <label for="telegramEnabled" class="text-sm text-gray-700">Enable Telegram Notifications</label>
+                </div>
+                <button type="submit" class="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-lg">
+                    Save Telegram Settings
+                </button>
+            </form>
+        </div>
+        </div>
+
+        <!-- Backup & Restore -->
+        <div id="content-backup" class="tab-content hidden">
+        <div class="bg-white rounded-lg shadow p-6 mb-6">
+            <h2 class="text-xl font-semibold text-gray-800 mb-4">Backup & Restore</h2>
+            <div class="space-y-4">
+                <div>
+                    <button onclick="exportBackup()" class="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2 rounded-lg w-full">
+                        📥 Export Backup
+                    </button>
+                    <p class="text-sm text-gray-600 mt-2">Download complete backup of all data and configurations</p>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Import Backup</label>
+                    <input type="file" id="backupFile" accept=".tar.gz,.gz" class="w-full border rounded-lg p-2">
+                    <button onclick="importBackup()" class="bg-orange-600 hover:bg-orange-700 text-white px-6 py-2 rounded-lg w-full mt-2">
+                        📤 Import Backup
+                    </button>
+                </div>
+            </div>
+        </div>
+        </div>
+
+        <!-- System Info -->
+        <div id="content-system" class="tab-content hidden">
+        <div class="bg-white rounded-lg shadow p-6">
+            <h2 class="text-xl font-semibold text-gray-800 mb-4">System Information</h2>
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <p class="text-sm text-gray-600">IranGate Version</p>
+                    <p class="font-semibold">v1.1.0</p>
+                </div>
+                <div>
+                    <p class="text-sm text-gray-600">API Status</p>
+                    <p id="apiStatus" class="font-semibold text-green-600">●  Online</p>
+                </div>
+                <div>
+                    <p class="text-sm text-gray-600">Database Location</p>
+                    <p class="font-mono text-sm">/opt/irangate/webpanel</p>
+                </div>
+                <div>
+                    <p class="text-sm text-gray-600">OpenVPN Service</p>
+                    <p id="vpnStatus" class="font-semibold">Loading...</p>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+
+    <script src="js/api.js"></script>
+    <script>
+        checkAuth();
+
+        // Tab switching functionality
+        function showTab(tabName) {
+            // Hide all tab contents
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.add('hidden');
+            });
+            
+            // Remove active class from all tabs
+            document.querySelectorAll('.tab-button').forEach(button => {
+                button.classList.remove('active');
+            });
+            
+            // Show selected tab content
+            document.getElementById(`content-${tabName}`).classList.remove('hidden');
+            
+            // Add active class to selected tab
+            document.getElementById(`tab-${tabName}`).classList.add('active');
+        }
+
+        // Load settings
+        async function loadSettings() {
+            try {
+                const [serverSettings, telegramSettings, serverStatus] = await Promise.all([
+                    api.getServerSettings(),
+                    api.getTelegramSettings(),
+                    api.getServerStatus()
+                ]);
+
+                if (serverSettings.success) {
+                    const data = serverSettings.data;
+                    document.getElementById('serverIP').value = data.server_ip || '';
+                }
+
+                if (telegramSettings.success) {
+                    const data = telegramSettings.data;
+                    document.getElementById('botToken').value = data.bot_token || '';
+                    document.getElementById('chatID').value = data.chat_id || '';
+                    document.getElementById('telegramEnabled').checked = data.enabled || false;
+                }
+
+                if (serverStatus.success) {
+                    const status = serverStatus.data.is_running ? 'Running' : 'Stopped';
+                    document.getElementById('vpnStatus').textContent = status;
+                    document.getElementById('vpnStatus').className = serverStatus.data.is_running ? 
+                        'font-semibold text-green-600' : 'font-semibold text-red-600';
+                }
+            } catch (error) {
+                console.error('Failed to load settings:', error);
+            }
+        }
+
+        // Change password
+        document.getElementById('passwordForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const oldPassword = document.getElementById('oldPassword').value;
+            const newPassword = document.getElementById('newPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+
+            if (newPassword !== confirmPassword) {
+                showToast('New passwords do not match!', 'error');
+                return;
+            }
+
+            if (newPassword.length < 8) {
+                showToast('Password must be at least 8 characters!', 'error');
+                return;
+            }
+
+            try {
+                const result = await api.changePassword(oldPassword, newPassword);
+                if (result.success) {
+                    showToast('Password changed successfully!', 'success');
+                    document.getElementById('passwordForm').reset();
+                } else {
+                    showToast(result.message || 'Failed to change password', 'error');
+                }
+            } catch (error) {
+                showToast('Failed to change password', 'error');
+            }
+        });
+
+        // Save server settings
+        document.getElementById('serverForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const settings = {
+                server_ip: document.getElementById('serverIP').value
+            };
+
+            try {
+                const result = await api.updateServerSettings(settings);
+                if (result.success) {
+                    showToast('Server settings saved! All client configs will use this server address.', 'success');
+                } else {
+                    showToast(result.message || 'Failed to save settings', 'error');
+                }
+            } catch (error) {
+                showToast('Failed to save server settings', 'error');
+            }
+        });
+
+        // Save Telegram settings
+        document.getElementById('telegramForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const settings = {
+                bot_token: document.getElementById('botToken').value,
+                chat_id: document.getElementById('chatID').value,
+                enabled: document.getElementById('telegramEnabled').checked
+            };
+
+            try {
+                const result = await api.updateTelegramSettings(settings);
+                if (result.success) {
+                    showToast('Telegram settings saved!', 'success');
+                } else {
+                    showToast(result.message || 'Failed to save settings', 'error');
+                }
+            } catch (error) {
+                showToast('Failed to save Telegram settings', 'error');
+            }
+        });
+
+        // Export backup
+        async function exportBackup() {
+            try {
+                await api.exportBackup();
+                showToast('Backup exported successfully!', 'success');
+            } catch (error) {
+                showToast('Failed to export backup', 'error');
+            }
+        }
+
+        // Import backup
+        async function importBackup() {
+            const fileInput = document.getElementById('backupFile');
+            if (!fileInput.files[0]) {
+                showToast('Please select a backup file', 'error');
+                return;
+            }
+
+            if (!confirm('Importing a backup will overwrite all current data. Continue?')) {
+                return;
+            }
+
+            try {
+                const result = await api.importBackup(fileInput.files[0]);
+                if (result.success) {
+                    showToast('Backup imported successfully! Reloading...', 'success');
+                    setTimeout(() => location.reload(), 2000);
+                } else {
+                    showToast(result.message || 'Failed to import backup', 'error');
+                }
+            } catch (error) {
+                showToast('Failed to import backup', 'error');
+            }
+        }
+
+        // Save theme settings
+        document.getElementById('themeForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const themeSettings = {
+                custom_css: document.getElementById('customCSS').value,
+                custom_js: document.getElementById('customJS').value
+            };
+
+            try {
+                // Save to localStorage
+                localStorage.setItem('webpanel_theme', JSON.stringify(themeSettings));
+                
+                // Apply theme immediately
+                applyTheme(themeSettings);
+                
+                showToast('Theme settings saved!', 'success');
+            } catch (error) {
+                showToast('Failed to save theme settings', 'error');
+            }
+        });
+
+        // Reset theme
+        function resetTheme() {
+            if (!confirm('Reset theme to default? This will remove all custom CSS and JavaScript.')) {
+                return;
+            }
+            
+            document.getElementById('customCSS').value = '';
+            document.getElementById('customJS').value = '';
+            localStorage.removeItem('webpanel_theme');
+            
+            // Remove applied theme
+            const customStyle = document.getElementById('custom-theme-style');
+            if (customStyle) customStyle.remove();
+            
+            showToast('Theme reset to default', 'success');
+        }
+
+        // Apply theme
+        function applyTheme(themeSettings) {
+            // Apply custom CSS
+            if (themeSettings.custom_css) {
+                let styleTag = document.getElementById('custom-theme-style');
+                if (!styleTag) {
+                    styleTag = document.createElement('style');
+                    styleTag.id = 'custom-theme-style';
+                    document.head.appendChild(styleTag);
+                }
+                styleTag.textContent = themeSettings.custom_css;
+            }
+            
+            // Apply custom JavaScript (SAFE - Commented out for security)
+            // Custom JavaScript execution is disabled for security reasons
+            // If you need custom functionality, please modify the theme loader directly
+            if (themeSettings.custom_js) {
+                console.warn('Custom JavaScript execution is disabled for security reasons.');
+                console.log('Custom JS code (not executed):', themeSettings.custom_js.substring(0, 100) + '...');
+            }
+        }
+
+        // Load theme on page load
+        function loadTheme() {
+            const themeSettings = localStorage.getItem('webpanel_theme');
+            if (themeSettings) {
+                try {
+                    const theme = JSON.parse(themeSettings);
+                    document.getElementById('customCSS').value = theme.custom_css || '';
+                    document.getElementById('customJS').value = theme.custom_js || '';
+                    applyTheme(theme);
+                } catch (error) {
+                    console.error('Failed to load theme:', error);
+                }
+            }
+            
+            // Load selected theme
+            const selectedTheme = localStorage.getItem('selected_theme') || 'eye-of-sea';
+            applySelectedTheme(selectedTheme);
+        }
+
+        // Theme switching functionality
+        function applySelectedTheme(themeName) {
+            // Remove all theme classes
+            document.body.classList.remove('theme-eye-of-sea', 'theme-capitan', 'theme-dragon', 'theme-ocean', 'theme-forest');
+            
+            // Add selected theme class
+            document.body.classList.add(`theme-${themeName}`);
+            
+            // Update active theme option
+            document.querySelectorAll('.theme-option').forEach(option => {
+                option.classList.remove('active');
+                if (option.dataset.theme === themeName) {
+                    option.classList.add('active');
+                }
+            });
+            
+            // Save selected theme
+            localStorage.setItem('selected_theme', themeName);
+        }
+
+        // Theme option click handlers
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.theme-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    const themeName = this.dataset.theme;
+                    applySelectedTheme(themeName);
+                    showToast(`Theme changed to ${this.querySelector('.theme-name').textContent}`, 'success');
+                });
+            });
+        });
+
+        // Load settings on page load
+        loadSettings();
+        loadTheme();
+
+        // Initialize sidebar
+        initSidebar('settings');
+    </script>
+    </div>
+</body>
+</html>
+

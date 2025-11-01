@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Documentation - IranGate</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="css/dark-theme.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="stylesheet" href="css/themes.css">
+    <link rel="stylesheet" href="css/theme-overrides.css">
+    <link rel="stylesheet" href="css/themes.css">
+    <link rel="stylesheet" href="css/theme-overrides.css">
+    <script src="js/particles.js"></script>
+    <script src="js/sidebar.js"></script>
+    <script src="js/theme-loader.js"></script>
+    <script src="js/theme-loader.js"></script>
+</head>
+<body>
+    <div class="main-content">
+    <div class="max-w-6xl mx-auto px-4 py-8">
+        <h1 class="text-3xl font-bold text-gray-800 mb-2">API Documentation</h1>
+        <p class="text-gray-600 mb-8">Interactive REST API reference for IranGate</p>
+
+        <div class="space-y-6">
+            <!-- Authentication -->
+            <div class="bg-white rounded-lg shadow p-6">
+                <h2 class="text-2xl font-semibold text-gray-800 mb-4">Authentication</h2>
+                <div class="bg-navy-800 rounded p-4 mb-4">
+                    <code class="text-cyan-400">POST /api/login</code>
+                </div>
+                <p class="text-gray-600 mb-4">Login and receive JWT token</p>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <p class="text-sm font-semibold mb-2">Request:</p>
+                        <pre class="bg-navy-800 p-4 rounded text-xs overflow-x-auto"><code class="text-cyan-400">{
+  "username": "admin",
+  "password": "admin123"
+}</code></pre>
+                    </div>
+                    <div>
+                        <p class="text-sm font-semibold mb-2">Response:</p>
+                        <pre class="bg-navy-800 p-4 rounded text-xs overflow-x-auto"><code class="text-green-400">{
+  "success": true,
+  "data": {
+    "token": "eyJhbGc...",
+    "username": "admin",
+    "expires_at": "..."
+  }
+}</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Client Endpoints -->
+            <div class="bg-white rounded-lg shadow p-6">
+                <h2 class="text-2xl font-semibold text-gray-800 mb-4">Client Management</h2>
+                
+                <div class="space-y-4">
+                    <div class="border-l-4 border-cyan-400 pl-4">
+                        <code class="text-cyan-400">GET /api/clients</code>
+                        <p class="text-sm text-gray-600 mt-2">List all VPN clients</p>
+                    </div>
+
+                    <div class="border-l-4 border-green-400 pl-4">
+                        <code class="text-green-400">POST /api/clients</code>
+                        <p class="text-sm text-gray-600 mt-2">Create new client</p>
+                        <pre class="bg-navy-800 p-2 rounded text-xs mt-2"><code>{"name": "john"}</code></pre>
+                    </div>
+
+                    <div class="border-l-4 border-red-400 pl-4">
+                        <code class="text-red-400">DELETE /api/clients/{name}</code>
+                        <p class="text-sm text-gray-600 mt-2">Remove client (revokes certificate!)</p>
+                    </div>
+
+                    <div class="border-l-4 border-blue-400 pl-4">
+                        <code class="text-blue-400">GET /api/clients/{name}/export</code>
+                        <p class="text-sm text-gray-600 mt-2">Download .ovpn configuration file</p>
+                    </div>
+
+                    <div class="border-l-4 border-purple-400 pl-4">
+                        <code class="text-purple-400">GET /api/clients/{name}/status</code>
+                        <p class="text-sm text-gray-600 mt-2">Check certificate status (Valid/Revoked/Expired)</p>
+                    </div>
+
+                    <div class="border-l-4 border-yellow-400 pl-4">
+                        <code class="text-yellow-400">GET /api/clients/orphaned</code>
+                        <p class="text-sm text-gray-600 mt-2">List orphaned certificates (security risk!)</p>
+                    </div>
+
+                    <div class="border-l-4 border-orange-400 pl-4">
+                        <code class="text-orange-400">POST /api/clients/cleanup-orphaned</code>
+                        <p class="text-sm text-gray-600 mt-2">Revoke all orphaned certificates</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Other Endpoints -->
+            <div class="bg-white rounded-lg shadow p-6">
+                <h2 class="text-2xl font-semibold text-gray-800 mb-4">Other Endpoints</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                    <div><code class="text-cyan-400">GET /api/config</code> - Get OpenVPN config</div>
+                    <div><code class="text-cyan-400">GET /api/monitor/stats</code> - Server statistics</div>
+                    <div><code class="text-cyan-400">GET /api/server/status</code> - Server status</div>
+                    <div><code class="text-cyan-400">POST /api/server/restart</code> - Restart OpenVPN</div>
+                    <div><code class="text-cyan-400">GET /api/users</code> - List admin users</div>
+                    <div><code class="text-cyan-400">POST /api/users</code> - Create admin user</div>
+                    <div><code class="text-cyan-400">GET /api/groups</code> - List client groups</div>
+                    <div><code class="text-cyan-400">POST /api/groups</code> - Create group</div>
+                    <div><code class="text-cyan-400">GET /api/backup/export</code> - Export backup</div>
+                    <div><code class="text-cyan-400">POST /api/backup/import</code> - Import backup</div>
+                </div>
+            </div>
+
+            <!-- Code Examples -->
+            <div class="bg-white rounded-lg shadow p-6">
+                <h2 class="text-2xl font-semibold text-gray-800 mb-4">Code Examples</h2>
+                
+                <div class="space-y-4">
+                    <div>
+                        <h3 class="font-semibold mb-2">cURL Example:</h3>
+                        <pre class="bg-navy-800 p-4 rounded overflow-x-auto"><code class="text-xs text-green-400">curl -X POST http://localhost:8080/api/login \
+  -H "Content-Type: application/json" \
+  -d '{"username":"admin","password":"admin123"}'</code></pre>
+                    </div>
+
+                    <div>
+                        <h3 class="font-semibold mb-2">JavaScript Example:</h3>
+                        <pre class="bg-navy-800 p-4 rounded overflow-x-auto"><code class="text-xs text-blue-400">const token = localStorage.getItem('token');
+const response = await fetch('/api/clients', {
+  headers: { 'Authorization': `Bearer ${token}` }
+});
+const data = await response.json();</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/api.js"></script>
+    <script>
+        checkAuth();
+        initSidebar('api-docs');
+    </script>
+    </div>
+</body>
+</html>
+

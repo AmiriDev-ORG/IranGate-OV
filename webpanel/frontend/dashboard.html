@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - IranGate</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0"></script>
+    <link rel="stylesheet" href="css/dark-theme.css">
+    <link rel="stylesheet" href="css/loading.css">
+    <link rel="stylesheet" href="css/mobile.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="stylesheet" href="css/themes.css">
+    <link rel="stylesheet" href="css/theme-overrides.css">
+    <script src="js/particles.js"></script>
+    <script src="js/sidebar.js"></script>
+    <script src="js/theme-loader.js"></script>
+</head>
+<body>
+    <!-- Sidebar will be inserted here by sidebar.js -->
+
+    <!-- Main Content -->
+    <div class="main-content">
+    <div class="max-w-7xl mx-auto px-4 py-8">
+        <!-- Welcome -->
+        <div class="mb-8">
+            <h1 class="text-3xl font-bold text-gray-800">Welcome, <span id="username"></span>!</h1>
+            <p class="text-gray-600 mt-2">Overview of your OpenVPN server</p>
+        </div>
+
+        <!-- Stats Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            <!-- Server Status -->
+            <div class="bg-white rounded-lg shadow p-6">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-gray-500 text-sm">Server Status</p>
+                        <p id="serverStatus" class="text-2xl font-bold text-gray-800 mt-2">Loading...</p>
+                    </div>
+                    <div class="p-3 bg-green-100 rounded-full">
+                        <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                        </svg>
+                    </div>
+                </div>
+                <!-- Server Control Buttons -->
+                <div class="mt-4 pt-4 border-t border-gray-200">
+                    <div class="flex space-x-2">
+                        <button onclick="startServer()" class="flex-1 bg-green-500 hover:bg-green-600 text-white py-2 px-3 rounded-lg text-sm font-medium transition-colors">
+                            <svg class="w-4 h-4 inline mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h1m4 0h1m-6 4h.01M19 10a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                            Start
+                        </button>
+                        <button onclick="stopServer()" class="flex-1 bg-red-500 hover:bg-red-600 text-white py-2 px-3 rounded-lg text-sm font-medium transition-colors">
+                            <svg class="w-4 h-4 inline mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 10h6v4H9z"/>
+                            </svg>
+                            Stop
+                        </button>
+                        <button onclick="restartServer()" class="flex-1 bg-orange-500 hover:bg-orange-600 text-white py-2 px-3 rounded-lg text-sm font-medium transition-colors">
+                            <svg class="w-4 h-4 inline mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+                            </svg>
+                            Restart
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Total Clients -->
+            <div class="bg-white rounded-lg shadow p-6">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-gray-500 text-sm">Total Clients</p>
+                        <p id="totalClients" class="text-2xl font-bold text-gray-800 mt-2">0</p>
+                    </div>
+                    <div class="p-3 bg-blue-100 rounded-full">
+                        <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Connected Clients -->
+            <div class="bg-white rounded-lg shadow p-6">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-gray-500 text-sm">Connected</p>
+                        <p id="connectedClients" class="text-2xl font-bold text-gray-800 mt-2">0</p>
+                    </div>
+                    <div class="p-3 bg-purple-100 rounded-full">
+                        <svg class="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Orphaned Certs -->
+            <div class="bg-white rounded-lg shadow p-6">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-gray-500 text-sm">Orphaned Certs</p>
+                        <p id="orphanedCount" class="text-2xl font-bold text-gray-800 mt-2">0</p>
+                    </div>
+                    <div class="p-3 bg-yellow-100 rounded-full">
+                        <svg class="w-8 h-8 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Alert for Orphaned Certificates -->
+        <div id="orphanedAlert" class="hidden bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-8">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                    <svg class="w-6 h-6 text-yellow-400 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
+                    </svg>
+                    <div>
+                        <p class="font-medium text-yellow-800">Security Warning!</p>
+                        <p class="text-sm text-yellow-700 mt-1">You have orphaned certificates that can still connect to your VPN!</p>
+                    </div>
+                </div>
+                <button onclick="cleanupOrphaned()" class="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-lg text-sm font-medium">
+                    Cleanup Now
+                </button>
+            </div>
+        </div>
+
+        <!-- System Stats -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+            <!-- CPU & Memory -->
+            <div class="bg-white rounded-lg shadow p-6">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-lg font-semibold text-gray-800">System Resources</h3>
+                    <div class="flex space-x-2">
+                        <button onclick="exportSystemData()" class="text-sm bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded">
+                            Export Data
+                        </button>
+                        <button onclick="clearSystemData()" class="text-sm bg-gray-500 hover:bg-gray-600 text-white px-3 py-1 rounded">
+                            Clear
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Real-time Metrics -->
+                <div class="grid grid-cols-2 gap-4 mb-6">
+                    <!-- CPU -->
+                    <div class="bg-gray-50 rounded-lg p-4">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-sm font-medium text-gray-600">CPU Usage</span>
+                            <span id="cpuUsage" class="text-sm font-bold text-blue-600">0%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2">
+                            <div id="cpuBar" class="bg-blue-500 h-2 rounded-full transition-all duration-300" style="width: 0%"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Memory -->
+                    <div class="bg-gray-50 rounded-lg p-4">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-sm font-medium text-gray-600">Memory</span>
+                            <span id="memoryUsage" class="text-sm font-bold text-green-600">0 GB</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2">
+                            <div id="memoryBar" class="bg-green-500 h-2 rounded-full transition-all duration-300" style="width: 0%"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Disk -->
+                    <div class="bg-gray-50 rounded-lg p-4">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-sm font-medium text-gray-600">Disk Usage</span>
+                            <span id="diskUsage" class="text-sm font-bold text-orange-600">0 GB</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2">
+                            <div id="diskBar" class="bg-orange-500 h-2 rounded-full transition-all duration-300" style="width: 0%"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Network -->
+                    <div class="bg-gray-50 rounded-lg p-4">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-sm font-medium text-gray-600">Network</span>
+                            <span id="networkTraffic" class="text-sm font-bold text-purple-600">0 KB/s</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2">
+                            <div id="networkBar" class="bg-purple-500 h-2 rounded-full transition-all duration-300" style="width: 0%"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Live Chart -->
+                <div class="mt-6">
+                    <canvas id="systemResourcesChart" style="height: 300px;"></canvas>
+                </div>
+            </div>
+
+            <!-- Traffic -->
+            <div class="bg-white rounded-lg shadow p-6">
+                <h3 class="text-lg font-semibold text-gray-800 mb-4">Traffic Statistics</h3>
+                <div class="space-y-4">
+                    <div class="flex justify-between items-center">
+                        <span class="text-gray-600">Total Traffic</span>
+                        <span id="totalTraffic" class="text-lg font-semibold text-gray-800">0 MB</span>
+                    </div>
+                    <div class="border-t pt-4">
+                        <p class="text-sm text-gray-600 mb-2">Quick Actions</p>
+                        <div class="space-y-2">
+                            <button onclick="window.location.href='clients.html'" class="w-full bg-blue-500 hover:bg-blue-600 text-white py-2 rounded-lg text-sm font-medium">
+                                Manage Clients
+                            </button>
+                            <button onclick="restartServer()" class="w-full bg-orange-500 hover:bg-orange-600 text-white py-2 rounded-lg text-sm font-medium">
+                                Restart Server
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Clients -->
+        <div class="bg-white rounded-lg shadow p-6">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-lg font-semibold text-gray-800">Recent Clients</h3>
+                <a href="clients.html" class="text-purple-600 hover:text-purple-700 text-sm font-medium">View All →</a>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="w-full">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Name</th>
+                            <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Created</th>
+                            <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Expires</th>
+                            <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="recentClientsTable" class="divide-y divide-gray-200">
+                        <tr>
+                            <td colspan="4" class="px-4 py-8 text-center text-gray-500">Loading...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/api.js"></script>
+    <script src="js/notifications.js"></script>
+    <script src="js/charts.js"></script>
+    <script src="js/websocket.js"></script>
+    <script src="js/system-resources.js"></script>
+    <script>
+        // Check authentication
+        checkAuth();
+
+        // Set username
+        document.getElementById('username').textContent = localStorage.getItem('username') || 'Admin';
+
+        // Load dashboard data
+        async function loadDashboard() {
+            try {
+                // Load all data in parallel
+                const [statsData, clientsData, orphanedData, statusData] = await Promise.all([
+                    api.getStats(),
+                    api.getClients(),
+                    api.getOrphanedClients(),
+                    api.getServerStatus()
+                ]);
+
+                // Update server status
+                if (statusData.success) {
+                    const isRunning = statusData.data.is_running;
+                    document.getElementById('serverStatus').textContent = isRunning ? 'Running' : 'Stopped';
+                    document.getElementById('serverStatus').className = isRunning ? 
+                        'text-2xl font-bold text-green-600 mt-2' : 
+                        'text-2xl font-bold text-red-600 mt-2';
+                }
+
+                // Update stats
+                if (statsData.success) {
+                    const stats = statsData.data;
+                    document.getElementById('connectedClients').textContent = stats.connected_clients || 0;
+                    document.getElementById('cpuUsage').textContent = `${stats.cpu_usage?.toFixed(1) || 0}%`;
+                    document.getElementById('cpuBar').style.width = `${stats.cpu_usage || 0}%`;
+                    document.getElementById('memoryUsage').textContent = `${stats.memory_usage_mb?.toFixed(0) || 0} MB`;
+                    document.getElementById('totalTraffic').textContent = formatBytes(stats.total_traffic_mb * 1024 * 1024 || 0);
+                    
+                    if (stats.uptime) {
+                        document.getElementById('uptime').textContent = formatUptime(stats.uptime / 1000000000);
+                    }
+                }
+
+                // Update clients
+                if (clientsData.success) {
+                    const clients = clientsData.data || [];
+                    document.getElementById('totalClients').textContent = clients.length;
+                    
+                    // Show recent 5 clients
+                    const recentClients = clients.slice(0, 5);
+                    const tbody = document.getElementById('recentClientsTable');
+                    
+                    if (recentClients.length === 0) {
+                        tbody.innerHTML = '<tr><td colspan="4" class="px-4 py-8 text-center text-gray-500">No clients yet</td></tr>';
+                    } else {
+                        tbody.innerHTML = recentClients.map(client => `
+                            <tr class="hover:bg-gray-50">
+                                <td class="px-4 py-3 text-sm font-medium text-gray-900">${client.name}</td>
+                                <td class="px-4 py-3 text-sm text-gray-600">${formatDate(client.created_at)}</td>
+                                <td class="px-4 py-3 text-sm text-gray-600">${formatDate(client.expires_at)}</td>
+                                <td class="px-4 py-3">
+                                    <span class="px-2 py-1 text-xs font-semibold rounded-full ${
+                                        client.active ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800'
+                                    }">
+                                        ${client.active ? 'Active' : 'Inactive'}
+                                    </span>
+                                </td>
+                            </tr>
+                        `).join('');
+                    }
+                }
+
+                // Check orphaned certificates
+                if (orphanedData.success && orphanedData.data) {
+                    const count = orphanedData.data.count || 0;
+                    document.getElementById('orphanedCount').textContent = count;
+                    
+                    if (count > 0) {
+                        document.getElementById('orphanedAlert').classList.remove('hidden');
+                    }
+                }
+            } catch (error) {
+                console.error('Failed to load dashboard:', error);
+                showToast('Failed to load dashboard data', 'error');
+            }
+        }
+
+        async function cleanupOrphaned() {
+            if (!confirm('This will revoke all orphaned certificates. Continue?')) return;
+            
+            try {
+                const result = await api.cleanupOrphaned();
+                if (result.success) {
+                    showToast('Orphaned certificates cleaned up successfully!', 'success');
+                    loadDashboard();
+                }
+            } catch (error) {
+                showToast('Failed to cleanup orphaned certificates', 'error');
+            }
+        }
+
+        async function restartServer() {
+            if (!confirm('Are you sure you want to restart the OpenVPN server?')) return;
+            
+            try {
+                const result = await api.restartServer();
+                if (result.success) {
+                    showToast('Server restarted successfully!', 'success');
+                    setTimeout(loadDashboard, 2000);
+                }
+            } catch (error) {
+                showToast('Failed to restart server', 'error');
+            }
+        }
+
+        async function startServer() {
+            if (!confirm('Are you sure you want to start the OpenVPN server?')) return;
+            
+            try {
+                const result = await api.startServer();
+                if (result.success) {
+                    showToast('Server started successfully!', 'success');
+                    setTimeout(loadDashboard, 2000);
+                }
+            } catch (error) {
+                showToast('Failed to start server', 'error');
+            }
+        }
+
+        async function stopServer() {
+            if (!confirm('Are you sure you want to stop the OpenVPN server?')) return;
+            
+            try {
+                const result = await api.stopServer();
+                if (result.success) {
+                    showToast('Server stopped successfully!', 'success');
+                    setTimeout(loadDashboard, 2000);
+                }
+            } catch (error) {
+                showToast('Failed to stop server', 'error');
+            }
+        }
+
+        // Initialize charts
+        function initCharts() {
+            // Traffic chart
+            const trafficData = chartManager.generateSampleTrafficData(7);
+            chartManager.createTrafficChart('miniTrafficChart', trafficData);
+
+            // Growth chart
+            const growthData = chartManager.generateSampleGrowthData(30);
+            chartManager.createClientGrowthChart('miniGrowthChart', growthData);
+        }
+
+        // Initial load
+        loadDashboard();
+        initCharts();
+
+        // Auto-refresh every 30 seconds
+        setInterval(loadDashboard, 30000);
+
+        // WebSocket event handlers for real-time updates
+        wsClient.on('client_created', (data) => {
+            notificationManager.success(`New client created: ${data.name}`);
+            loadDashboard();
+        });
+
+        wsClient.on('client_removed', (data) => {
+            notificationManager.info(`Client removed: ${data.name}`);
+            loadDashboard();
+        });
+
+        wsClient.on('stats_update', (data) => {
+            // Update stats in real-time via WebSocket
+            if (data.connected_clients !== undefined) {
+                document.getElementById('connectedClients').textContent = data.connected_clients;
+            }
+        });
+
+        // Initialize sidebar
+        initSidebar('dashboard');
+
+        // System Resources Functions
+        function exportSystemData() {
+            if (window.systemResourcesMonitor) {
+                window.systemResourcesMonitor.exportData();
+                showToast('System data exported successfully!', 'success');
+            } else {
+                showToast('System resources monitor not available', 'error');
+            }
+        }
+
+        function clearSystemData() {
+            if (window.systemResourcesMonitor) {
+                window.systemResourcesMonitor.clearHistoricalData();
+                showToast('System data cleared successfully!', 'success');
+            } else {
+                showToast('System resources monitor not available', 'error');
+            }
+        }
+    </script>
+    </div>
+</body>
+</html>
+

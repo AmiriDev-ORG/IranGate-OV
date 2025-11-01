@@ -1,0 +1,818 @@
+/* IranGate Comprehensive Theme System */
+
+/* Eye of Sea Theme (Default) */
+.theme-eye-of-sea {
+    --primary-bg: #0a192f;
+    --secondary-bg: #112240;
+    --tertiary-bg: #1a2f4f;
+    --accent-color: #64ffda;
+    --accent-secondary: #00d4ff;
+    --text-primary: #e6f1ff;
+    --text-secondary: #8892b0;
+    --text-muted: #495670;
+    --success: #10b981;
+    --error: #ef4444;
+    --warning: #f59e0b;
+    --border-color: #1e3a5f;
+    --hover-bg: #2e5090;
+    --sidebar-bg: rgba(17, 34, 64, 0.95);
+    --sidebar-border: rgba(100, 255, 218, 0.2);
+    --card-bg: rgba(17, 34, 64, 0.8);
+    --button-bg: linear-gradient(135deg, #64ffda, #00d4ff);
+    --button-hover: linear-gradient(135deg, #00d4ff, #64ffda);
+}
+
+/* Capitan Theme - Modern Black and White */
+.theme-capitan {
+    --primary-bg: #000000;
+    --secondary-bg: #1a1a1a;
+    --tertiary-bg: #2d2d2d;
+    --accent-color: #ffffff;
+    --accent-secondary: #f0f0f0;
+    --text-primary: #ffffff;
+    --text-secondary: #cccccc;
+    --text-muted: #999999;
+    --success: #00ff00;
+    --error: #ff0000;
+    --warning: #ffff00;
+    --border-color: #333333;
+    --hover-bg: #404040;
+    --sidebar-bg: rgba(26, 26, 26, 0.95);
+    --sidebar-border: rgba(255, 255, 255, 0.2);
+    --card-bg: rgba(26, 26, 26, 0.8);
+    --button-bg: linear-gradient(135deg, #ffffff, #f0f0f0);
+    --button-hover: linear-gradient(135deg, #f0f0f0, #ffffff);
+}
+
+/* Dragon Theme - Red, Orange, Black */
+.theme-dragon {
+    --primary-bg: #1a0000;
+    --secondary-bg: #2d0000;
+    --tertiary-bg: #400000;
+    --accent-color: #ff4500;
+    --accent-secondary: #ff6b35;
+    --text-primary: #ffcc99;
+    --text-secondary: #ff9966;
+    --text-muted: #cc6633;
+    --success: #ff6600;
+    --error: #ff0000;
+    --warning: #ffaa00;
+    --border-color: #660000;
+    --hover-bg: #800000;
+    --sidebar-bg: rgba(45, 0, 0, 0.95);
+    --sidebar-border: rgba(255, 69, 0, 0.3);
+    --card-bg: rgba(45, 0, 0, 0.8);
+    --button-bg: linear-gradient(135deg, #ff4500, #ff6b35);
+    --button-hover: linear-gradient(135deg, #ff6b35, #ff4500);
+}
+
+/* Ocean Theme - Blue and Teal */
+.theme-ocean {
+    --primary-bg: #001a2e;
+    --secondary-bg: #002d4a;
+    --tertiary-bg: #004066;
+    --accent-color: #00bcd4;
+    --accent-secondary: #26c6da;
+    --text-primary: #b3e5fc;
+    --text-secondary: #81d4fa;
+    --text-muted: #4fc3f7;
+    --success: #00e676;
+    --error: #f44336;
+    --warning: #ffc107;
+    --border-color: #0277bd;
+    --hover-bg: #0288d1;
+    --sidebar-bg: rgba(0, 45, 74, 0.95);
+    --sidebar-border: rgba(0, 188, 212, 0.3);
+    --card-bg: rgba(0, 45, 74, 0.8);
+    --button-bg: linear-gradient(135deg, #00bcd4, #26c6da);
+    --button-hover: linear-gradient(135deg, #26c6da, #00bcd4);
+}
+
+/* Forest Theme - Green and Nature */
+.theme-forest {
+    --primary-bg: #0d1b0d;
+    --secondary-bg: #1a2e1a;
+    --tertiary-bg: #274127;
+    --accent-color: #4caf50;
+    --accent-secondary: #66bb6a;
+    --text-primary: #c8e6c9;
+    --text-secondary: #a5d6a7;
+    --text-muted: #81c784;
+    --success: #4caf50;
+    --error: #f44336;
+    --warning: #ff9800;
+    --border-color: #2e7d32;
+    --hover-bg: #388e3c;
+    --sidebar-bg: rgba(26, 46, 26, 0.95);
+    --sidebar-border: rgba(76, 175, 80, 0.3);
+    --card-bg: rgba(26, 46, 26, 0.8);
+    --button-bg: linear-gradient(135deg, #4caf50, #66bb6a);
+    --button-hover: linear-gradient(135deg, #66bb6a, #4caf50);
+}
+
+
+/* Apply theme variables to all elements */
+body {
+    background: var(--primary-bg) !important;
+    color: var(--text-primary) !important;
+    transition: all 0.3s ease;
+}
+
+
+/* Sidebar Theme Overrides */
+.theme-eye-of-sea .sidebar,
+.theme-capitan .sidebar,
+.theme-dragon .sidebar,
+.theme-ocean .sidebar,
+.theme-forest .sidebar {
+    background: var(--sidebar-bg) !important;
+    border-right-color: var(--sidebar-border) !important;
+}
+
+.theme-eye-of-sea .sidebar-header,
+.theme-capitan .sidebar-header,
+.theme-dragon .sidebar-header,
+.theme-ocean .sidebar-header,
+.theme-forest .sidebar-header {
+    background: var(--tertiary-bg) !important;
+    border-bottom-color: var(--sidebar-border) !important;
+}
+
+.theme-eye-of-sea .sidebar-logo-icon,
+.theme-capitan .sidebar-logo-icon,
+.theme-dragon .sidebar-logo-icon,
+.theme-ocean .sidebar-logo-icon,
+.theme-forest .sidebar-logo-icon {
+    background: var(--button-bg) !important;
+}
+
+.theme-eye-of-sea .sidebar-nav-item,
+.theme-capitan .sidebar-nav-item,
+.theme-dragon .sidebar-nav-item,
+.theme-ocean .sidebar-nav-item,
+.theme-forest .sidebar-nav-item {
+    color: var(--text-secondary) !important;
+}
+
+.theme-eye-of-sea .sidebar-nav-item:hover,
+.theme-capitan .sidebar-nav-item:hover,
+.theme-dragon .sidebar-nav-item:hover,
+.theme-ocean .sidebar-nav-item:hover,
+.theme-forest .sidebar-nav-item:hover {
+    background: var(--hover-bg) !important;
+    color: var(--text-primary) !important;
+}
+
+.theme-eye-of-sea .sidebar-nav-item.active,
+.theme-capitan .sidebar-nav-item.active,
+.theme-dragon .sidebar-nav-item.active,
+.theme-ocean .sidebar-nav-item.active,
+.theme-forest .sidebar-nav-item.active {
+    background: var(--accent-color) !important;
+    color: var(--primary-bg) !important;
+}
+
+/* Card and Container Overrides */
+.theme-eye-of-sea .bg-white,
+.theme-capitan .bg-white,
+.theme-dragon .bg-white,
+.theme-ocean .bg-white,
+.theme-forest .bg-white {
+    background: var(--card-bg) !important;
+    color: var(--text-primary) !important;
+    border-color: var(--border-color) !important;
+}
+
+/* Button Overrides */
+.theme-eye-of-sea .bg-purple-600,
+.theme-capitan .bg-purple-600,
+.theme-dragon .bg-purple-600,
+.theme-ocean .bg-purple-600,
+.theme-forest .bg-purple-600 {
+    background: var(--button-bg) !important;
+    color: var(--primary-bg) !important;
+}
+
+.theme-eye-of-sea .bg-purple-600:hover,
+.theme-capitan .bg-purple-600:hover,
+.theme-dragon .bg-purple-600:hover,
+.theme-ocean .bg-purple-600:hover,
+.theme-forest .bg-purple-600:hover {
+    background: var(--button-hover) !important;
+}
+
+/* Text Color Overrides */
+.theme-eye-of-sea .text-gray-800,
+.theme-capitan .text-gray-800,
+.theme-dragon .text-gray-800,
+.theme-ocean .text-gray-800,
+.theme-forest .text-gray-800 {
+    color: var(--text-primary) !important;
+}
+
+.theme-eye-of-sea .text-gray-600,
+.theme-capitan .text-gray-600,
+.theme-dragon .text-gray-600,
+.theme-ocean .text-gray-600,
+.theme-forest .text-gray-600 {
+    color: var(--text-secondary) !important;
+}
+
+/* Brand Text Color Overrides - Fix Iran Gate text */
+.theme-eye-of-sea .sidebar-logo-text,
+.theme-capitan .sidebar-logo-text,
+.theme-dragon .sidebar-logo-text,
+.theme-ocean .sidebar-logo-text,
+.theme-forest .sidebar-logo-text {
+    background: none !important;
+    -webkit-background-clip: unset !important;
+    -webkit-text-fill-color: unset !important;
+    background-clip: unset !important;
+    color: var(--text-primary) !important;
+}
+
+.theme-eye-of-sea .sidebar-logo-text,
+.theme-capitan .sidebar-logo-text,
+.theme-dragon .sidebar-logo-text,
+.theme-ocean .sidebar-logo-text,
+.theme-forest .sidebar-logo-text,
+.theme-eye-of-sea .brand-text,
+.theme-capitan .brand-text,
+.theme-dragon .brand-text,
+.theme-ocean .brand-text,
+.theme-forest .brand-text,
+.theme-eye-of-sea .sidebar-brand,
+.theme-capitan .sidebar-brand,
+.theme-dragon .sidebar-brand,
+.theme-ocean .sidebar-brand,
+.theme-forest .sidebar-brand,
+.theme-eye-of-sea .logo-text,
+.theme-capitan .logo-text,
+.theme-dragon .logo-text,
+.theme-ocean .logo-text,
+.theme-forest .logo-text,
+.theme-eye-of-sea #brand-text,
+.theme-capitan #brand-text,
+.theme-dragon #brand-text,
+.theme-ocean #brand-text,
+.theme-forest #brand-text,
+.theme-eye-of-sea #sidebar-brand,
+.theme-capitan #sidebar-brand,
+.theme-dragon #sidebar-brand,
+.theme-ocean #sidebar-brand,
+.theme-forest #sidebar-brand,
+.theme-eye-of-sea #logo-text,
+.theme-capitan #logo-text,
+.theme-dragon #logo-text,
+.theme-ocean #logo-text,
+.theme-forest #logo-text,
+.theme-eye-of-sea .navbar-brand,
+.theme-capitan .navbar-brand,
+.theme-dragon .navbar-brand,
+.theme-ocean .navbar-brand,
+.theme-forest .navbar-brand {
+    color: var(--text-primary) !important;
+}
+
+/* Sidebar User Text Override */
+.theme-eye-of-sea .sidebar-user,
+.theme-capitan .sidebar-user,
+.theme-dragon .sidebar-user,
+.theme-ocean .sidebar-user,
+.theme-forest .sidebar-user {
+    color: var(--text-secondary) !important;
+}
+
+.theme-eye-of-sea .sidebar-user span,
+.theme-capitan .sidebar-user span,
+.theme-dragon .sidebar-user span,
+.theme-ocean .sidebar-user span,
+.theme-forest .sidebar-user span {
+    color: var(--text-primary) !important;
+}
+
+/* Sidebar Menu Button Overrides - Fix button backgrounds and text */
+.theme-eye-of-sea .menu-item,
+.theme-capitan .menu-item,
+.theme-dragon .menu-item,
+.theme-ocean .menu-item,
+.theme-forest .menu-item {
+    color: var(--text-secondary) !important;
+    background: transparent !important;
+}
+.theme-eye-of-sea .sidebar-menu-button,
+.theme-capitan .sidebar-menu-button,
+.theme-dragon .sidebar-menu-button,
+.theme-ocean .sidebar-menu-button,
+.theme-forest .sidebar-menu-button,
+.theme-eye-of-sea .nav-button,
+.theme-capitan .nav-button,
+.theme-dragon .nav-button,
+.theme-ocean .nav-button,
+.theme-forest .nav-button,
+.theme-eye-of-sea .sidebar-item,
+.theme-capitan .sidebar-item,
+.theme-dragon .sidebar-item,
+.theme-ocean .sidebar-item,
+.theme-forest .sidebar-item,
+.theme-eye-of-sea .nav-item,
+.theme-capitan .nav-item,
+.theme-dragon .nav-item,
+.theme-ocean .nav-item,
+.theme-forest .nav-item,
+.theme-eye-of-sea .sidebar-link,
+.theme-capitan .sidebar-link,
+.theme-dragon .sidebar-link,
+.theme-ocean .sidebar-link,
+.theme-forest .sidebar-link {
+    background: var(--secondary-bg) !important;
+    color: var(--text-primary) !important;
+    border-color: var(--border-color) !important;
+}
+
+.theme-eye-of-sea .menu-item:hover,
+.theme-capitan .menu-item:hover,
+.theme-dragon .menu-item:hover,
+.theme-ocean .menu-item:hover,
+.theme-forest .menu-item:hover,
+.theme-eye-of-sea .sidebar-menu-button:hover,
+.theme-capitan .sidebar-menu-button:hover,
+.theme-dragon .sidebar-menu-button:hover,
+.theme-ocean .sidebar-menu-button:hover,
+.theme-forest .sidebar-menu-button:hover,
+.theme-eye-of-sea .nav-button:hover,
+.theme-capitan .nav-button:hover,
+.theme-dragon .nav-button:hover,
+.theme-ocean .nav-button:hover,
+.theme-forest .nav-button:hover,
+.theme-eye-of-sea .sidebar-item:hover,
+.theme-capitan .sidebar-item:hover,
+.theme-dragon .sidebar-item:hover,
+.theme-ocean .sidebar-item:hover,
+.theme-forest .sidebar-item:hover,
+.theme-eye-of-sea .nav-item:hover,
+.theme-capitan .nav-item:hover,
+.theme-dragon .nav-item:hover,
+.theme-ocean .nav-item:hover,
+.theme-forest .nav-item:hover,
+.theme-eye-of-sea .sidebar-link:hover,
+.theme-capitan .sidebar-link:hover,
+.theme-dragon .sidebar-link:hover,
+.theme-ocean .sidebar-link:hover,
+.theme-forest .sidebar-link:hover {
+    background: var(--hover-bg) !important;
+    color: var(--text-primary) !important;
+}
+
+.theme-eye-of-sea .menu-item.active,
+.theme-capitan .menu-item.active,
+.theme-dragon .menu-item.active,
+.theme-ocean .menu-item.active,
+.theme-forest .menu-item.active,
+.theme-eye-of-sea .sidebar-menu-button.active,
+.theme-capitan .sidebar-menu-button.active,
+.theme-dragon .sidebar-menu-button.active,
+.theme-ocean .sidebar-menu-button.active,
+.theme-forest .sidebar-menu-button.active,
+.theme-eye-of-sea .nav-button.active,
+.theme-capitan .nav-button.active,
+.theme-dragon .nav-button.active,
+.theme-ocean .nav-button.active,
+.theme-forest .nav-button.active,
+.theme-eye-of-sea .sidebar-item.active,
+.theme-capitan .sidebar-item.active,
+.theme-dragon .sidebar-item.active,
+.theme-ocean .sidebar-item.active,
+.theme-forest .sidebar-item.active,
+.theme-eye-of-sea .nav-item.active,
+.theme-capitan .nav-item.active,
+.theme-dragon .nav-item.active,
+.theme-ocean .nav-item.active,
+.theme-forest .nav-item.active,
+.theme-eye-of-sea .sidebar-link.active,
+.theme-capitan .sidebar-link.active,
+.theme-dragon .sidebar-link.active,
+.theme-ocean .sidebar-link.active,
+.theme-forest .sidebar-link.active {
+    background: var(--accent-color) !important;
+    color: var(--primary-bg) !important;
+}
+
+/* Logout Button Overrides */
+.theme-eye-of-sea .logout-btn,
+.theme-capitan .logout-btn,
+.theme-dragon .logout-btn,
+.theme-ocean .logout-btn,
+.theme-forest .logout-btn {
+    background: var(--button-bg) !important;
+    color: var(--primary-bg) !important;
+    border: 1px solid var(--accent-color) !important;
+}
+
+.theme-eye-of-sea .logout-btn:hover,
+.theme-capitan .logout-btn:hover,
+.theme-dragon .logout-btn:hover,
+.theme-ocean .logout-btn:hover,
+.theme-forest .logout-btn:hover {
+    background: var(--button-hover) !important;
+    color: var(--primary-bg) !important;
+}
+
+.theme-eye-of-sea .logout-button,
+.theme-capitan .logout-button,
+.theme-dragon .logout-button,
+.theme-ocean .logout-button,
+.theme-forest .logout-button,
+.theme-eye-of-sea .btn-logout,
+.theme-capitan .btn-logout,
+.theme-dragon .btn-logout,
+.theme-ocean .btn-logout,
+.theme-forest .btn-logout,
+.theme-eye-of-sea #logout-button,
+.theme-capitan #logout-button,
+.theme-dragon #logout-button,
+.theme-ocean #logout-button,
+.theme-forest #logout-button,
+.theme-eye-of-sea #btn-logout,
+.theme-capitan #btn-logout,
+.theme-dragon #btn-logout,
+.theme-ocean #btn-logout,
+.theme-forest #btn-logout,
+.theme-eye-of-sea .logout-btn,
+.theme-capitan .logout-btn,
+.theme-dragon .logout-btn,
+.theme-ocean .logout-btn,
+.theme-forest .logout-btn,
+.theme-eye-of-sea .btn-signout,
+.theme-capitan .btn-signout,
+.theme-dragon .btn-signout,
+.theme-ocean .btn-signout,
+.theme-forest .btn-signout {
+    background: var(--button-bg) !important;
+    color: var(--primary-bg) !important;
+    border-color: var(--accent-color) !important;
+}
+
+.theme-eye-of-sea .logout-button:hover,
+.theme-capitan .logout-button:hover,
+.theme-dragon .logout-button:hover,
+.theme-ocean .logout-button:hover,
+.theme-forest .logout-button:hover,
+.theme-eye-of-sea .btn-logout:hover,
+.theme-capitan .btn-logout:hover,
+.theme-dragon .btn-logout:hover,
+.theme-ocean .btn-logout:hover,
+.theme-forest .btn-logout:hover,
+.theme-eye-of-sea #logout-button:hover,
+.theme-capitan #logout-button:hover,
+.theme-dragon #logout-button:hover,
+.theme-ocean #logout-button:hover,
+.theme-forest #logout-button:hover,
+.theme-eye-of-sea #btn-logout:hover,
+.theme-capitan #btn-logout:hover,
+.theme-dragon #btn-logout:hover,
+.theme-ocean #btn-logout:hover,
+.theme-forest #btn-logout:hover,
+.theme-eye-of-sea .logout-btn:hover,
+.theme-capitan .logout-btn:hover,
+.theme-dragon .logout-btn:hover,
+.theme-ocean .logout-btn:hover,
+.theme-forest .logout-btn:hover,
+.theme-eye-of-sea .btn-signout:hover,
+.theme-capitan .btn-signout:hover,
+.theme-dragon .btn-signout:hover,
+.theme-ocean .btn-signout:hover,
+.theme-forest .btn-signout:hover {
+    background: var(--button-hover) !important;
+    color: var(--primary-bg) !important;
+}
+
+/* Border Overrides */
+.theme-eye-of-sea .border-gray-300,
+.theme-capitan .border-gray-300,
+.theme-dragon .border-gray-300,
+.theme-ocean .border-gray-300,
+.theme-forest .border-gray-300 {
+    border-color: var(--border-color) !important;
+}
+
+/* Input Field Overrides */
+.theme-eye-of-sea input,
+.theme-capitan input,
+.theme-dragon input,
+.theme-ocean input,
+.theme-forest input {
+    background: var(--tertiary-bg) !important;
+    color: var(--text-primary) !important;
+    border-color: var(--border-color) !important;
+}
+
+.theme-eye-of-sea input:focus,
+.theme-capitan input:focus,
+.theme-dragon input:focus,
+.theme-ocean input:focus,
+.theme-forest input:focus {
+    border-color: var(--accent-color) !important;
+    box-shadow: 0 0 0 2px rgba(100, 255, 218, 0.2) !important;
+}
+
+/* Table Overrides */
+.theme-eye-of-sea table,
+.theme-capitan table,
+.theme-dragon table,
+.theme-ocean table,
+.theme-forest table {
+    background: var(--card-bg) !important;
+    color: var(--text-primary) !important;
+}
+
+.theme-eye-of-sea th,
+.theme-capitan th,
+.theme-dragon th,
+.theme-ocean th,
+.theme-forest th {
+    background: var(--secondary-bg) !important;
+    color: var(--text-primary) !important;
+    border-color: var(--border-color) !important;
+}
+
+.theme-eye-of-sea td,
+.theme-capitan td,
+.theme-dragon td,
+.theme-ocean td,
+.theme-forest td {
+    border-color: var(--border-color) !important;
+    color: var(--text-secondary) !important;
+}
+
+/* Chart and Graph Overrides */
+.theme-eye-of-sea canvas,
+.theme-capitan canvas,
+.theme-dragon canvas,
+.theme-ocean canvas,
+.theme-forest canvas {
+    background: var(--card-bg) !important;
+}
+
+/* Scrollbar Overrides */
+.theme-eye-of-sea ::-webkit-scrollbar-thumb,
+.theme-capitan ::-webkit-scrollbar-thumb,
+.theme-dragon ::-webkit-scrollbar-thumb,
+.theme-ocean ::-webkit-scrollbar-thumb,
+.theme-forest ::-webkit-scrollbar-thumb {
+    background: var(--accent-color) !important;
+}
+
+/* Animation and Effect Overrides */
+.theme-eye-of-sea .particle,
+.theme-capitan .particle,
+.theme-dragon .particle,
+.theme-ocean .particle,
+.theme-forest .particle {
+    background: var(--accent-color) !important;
+}
+
+/* Status Indicators */
+.theme-eye-of-sea .status-online,
+.theme-capitan .status-online,
+.theme-dragon .status-online,
+.theme-ocean .status-online,
+.theme-forest .status-online {
+    background: var(--success) !important;
+}
+
+.theme-eye-of-sea .status-offline,
+.theme-capitan .status-offline,
+.theme-dragon .status-offline,
+.theme-ocean .status-offline,
+.theme-forest .status-offline {
+    background: var(--error) !important;
+}
+
+/* Theme switcher styles */
+.theme-switcher {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.theme-option {
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    padding: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: var(--secondary-bg);
+    color: var(--text-primary);
+}
+
+.theme-option:hover {
+    border-color: var(--accent-color);
+    background: var(--hover-bg);
+    transform: translateY(-2px);
+}
+
+.theme-option.active {
+    border-color: var(--accent-color);
+    background: var(--tertiary-bg);
+    box-shadow: 0 0 10px rgba(100, 255, 218, 0.3);
+}
+
+.theme-preview {
+    width: 100%;
+    height: 60px;
+    border-radius: 4px;
+    margin-bottom: 0.5rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.theme-preview.eye-of-sea {
+    background: linear-gradient(45deg, #0a192f 0%, #112240 50%, #64ffda 100%);
+}
+
+.theme-preview.capitan {
+    background: linear-gradient(45deg, #000000 0%, #1a1a1a 50%, #ffffff 100%);
+}
+
+.theme-preview.dragon {
+    background: linear-gradient(45deg, #1a0000 0%, #2d0000 50%, #ff4500 100%);
+}
+
+.theme-preview.ocean {
+    background: linear-gradient(45deg, #001a2e 0%, #002d4a 50%, #00bcd4 100%);
+}
+
+.theme-preview.forest {
+    background: linear-gradient(45deg, #0d1b0d 0%, #1a2e1a 50%, #4caf50 100%);
+}
+
+
+.theme-name {
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+}
+
+.theme-description {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+}
+
+/* Additional Theme Synchronization Rules */
+/* Ensure all text elements use theme colors */
+.theme-eye-of-sea h1, .theme-eye-of-sea h2, .theme-eye-of-sea h3, .theme-eye-of-sea h4, .theme-eye-of-sea h5, .theme-eye-of-sea h6,
+.theme-capitan h1, .theme-capitan h2, .theme-capitan h3, .theme-capitan h4, .theme-capitan h5, .theme-capitan h6,
+.theme-dragon h1, .theme-dragon h2, .theme-dragon h3, .theme-dragon h4, .theme-dragon h5, .theme-dragon h6,
+.theme-ocean h1, .theme-ocean h2, .theme-ocean h3, .theme-ocean h4, .theme-ocean h5, .theme-ocean h6,
+.theme-forest h1, .theme-forest h2, .theme-forest h3, .theme-forest h4, .theme-forest h5, .theme-forest h6 {
+    color: var(--text-primary) !important;
+}
+
+/* Ensure all paragraph and span elements use theme colors */
+.theme-eye-of-sea p, .theme-eye-of-sea span, .theme-eye-of-sea div,
+.theme-capitan p, .theme-capitan span, .theme-capitan div,
+.theme-dragon p, .theme-dragon span, .theme-dragon div,
+.theme-ocean p, .theme-ocean span, .theme-ocean div,
+.theme-forest p, .theme-forest span, .theme-forest div {
+    color: var(--text-primary) !important;
+}
+
+/* Override Tailwind CSS classes commonly used in the webpanel */
+.theme-eye-of-sea .text-gray-800,
+.theme-capitan .text-gray-800,
+.theme-dragon .text-gray-800,
+.theme-ocean .text-gray-800,
+.theme-forest .text-gray-800 {
+    color: var(--text-primary) !important;
+}
+
+.theme-eye-of-sea .text-gray-600,
+.theme-capitan .text-gray-600,
+.theme-dragon .text-gray-600,
+.theme-ocean .text-gray-600,
+.theme-forest .text-gray-600 {
+    color: var(--text-secondary) !important;
+}
+
+.theme-eye-of-sea .text-gray-500,
+.theme-capitan .text-gray-500,
+.theme-dragon .text-gray-500,
+.theme-ocean .text-gray-500,
+.theme-forest .text-gray-500 {
+    color: var(--text-muted) !important;
+}
+
+.theme-eye-of-sea .bg-white,
+.theme-capitan .bg-white,
+.theme-dragon .bg-white,
+.theme-ocean .bg-white,
+.theme-forest .bg-white {
+    background: var(--card-bg) !important;
+    color: var(--text-primary) !important;
+}
+
+/* Override any hardcoded color classes */
+.theme-eye-of-sea [style*="color"],
+.theme-capitan [style*="color"],
+.theme-dragon [style*="color"],
+.theme-ocean [style*="color"],
+.theme-forest [style*="color"] {
+    color: var(--text-primary) !important;
+}
+
+/* Override any hardcoded background classes */
+.theme-eye-of-sea [style*="background"],
+.theme-capitan [style*="background"],
+.theme-dragon [style*="background"],
+.theme-ocean [style*="background"],
+.theme-forest [style*="background"] {
+    background: var(--secondary-bg) !important;
+}
+
+/* High Specificity Overrides for Hardcoded Styles */
+.theme-eye-of-sea .sidebar .sidebar-logo-text,
+.theme-capitan .sidebar .sidebar-logo-text,
+.theme-dragon .sidebar .sidebar-logo-text,
+.theme-ocean .sidebar .sidebar-logo-text,
+.theme-forest .sidebar .sidebar-logo-text {
+    background: none !important;
+    -webkit-background-clip: unset !important;
+    -webkit-text-fill-color: unset !important;
+    background-clip: unset !important;
+    color: var(--text-primary) !important;
+}
+
+.theme-eye-of-sea .sidebar .menu-item,
+.theme-capitan .sidebar .menu-item,
+.theme-dragon .sidebar .menu-item,
+.theme-ocean .sidebar .menu-item,
+.theme-forest .sidebar .menu-item {
+    color: var(--text-secondary) !important;
+    background: transparent !important;
+}
+
+.theme-eye-of-sea .sidebar .menu-item:hover,
+.theme-capitan .sidebar .menu-item:hover,
+.theme-dragon .sidebar .menu-item:hover,
+.theme-ocean .sidebar .menu-item:hover,
+.theme-forest .sidebar .menu-item:hover {
+    background: var(--hover-bg) !important;
+    color: var(--text-primary) !important;
+}
+
+.theme-eye-of-sea .sidebar .menu-item.active,
+.theme-capitan .sidebar .menu-item.active,
+.theme-dragon .sidebar .menu-item.active,
+.theme-ocean .sidebar .menu-item.active,
+.theme-forest .sidebar .menu-item.active {
+    background: var(--accent-color) !important;
+    color: var(--primary-bg) !important;
+}
+
+.theme-eye-of-sea .sidebar .logout-btn,
+.theme-capitan .sidebar .logout-btn,
+.theme-dragon .sidebar .logout-btn,
+.theme-ocean .sidebar .logout-btn,
+.theme-forest .sidebar .logout-btn {
+    background: var(--button-bg) !important;
+    color: var(--primary-bg) !important;
+    border: 1px solid var(--accent-color) !important;
+}
+
+.theme-eye-of-sea .sidebar .logout-btn:hover,
+.theme-capitan .sidebar .logout-btn:hover,
+.theme-dragon .sidebar .logout-btn:hover,
+.theme-ocean .sidebar .logout-btn:hover,
+.theme-forest .sidebar .logout-btn:hover {
+    background: var(--button-hover) !important;
+    color: var(--primary-bg) !important;
+}
+
+/* Online themes section */
+.online-themes {
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.online-themes h3 {
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+}
+
+.theme-link {
+    display: inline-block;
+    background: var(--accent-color);
+    color: var(--primary-bg);
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.theme-link:hover {
+    background: var(--accent-secondary);
+    transform: translateY(-1px);
+}

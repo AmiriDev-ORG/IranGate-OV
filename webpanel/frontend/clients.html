@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clients - IranGate</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="css/dark-theme.css">
+    <link rel="stylesheet" href="css/loading.css">
+    <link rel="stylesheet" href="css/mobile.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="stylesheet" href="css/themes.css">
+    <link rel="stylesheet" href="css/theme-overrides.css">
+    <script src="js/particles.js"></script>
+    <script src="js/sidebar.js"></script>
+    <script src="js/theme-loader.js"></script>
+</head>
+<body>
+    <!-- Main Content -->
+    <div class="main-content">
+    <div class="max-w-7xl mx-auto px-4 py-8">
+        <!-- Header -->
+        <div class="flex justify-between items-center mb-8">
+            <div>
+                <h1 class="text-3xl font-bold text-gray-800">Client Management</h1>
+                <p class="text-gray-600 mt-2">Manage your VPN clients</p>
+            </div>
+            <button onclick="showAddModal()" class="bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-lg font-medium flex items-center">
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                </svg>
+                Add Client
+            </button>
+        </div>
+
+        <!-- Search & Filter -->
+        <div class="bg-white rounded-lg shadow p-4 mb-6">
+            <div class="flex flex-col md:flex-row gap-4">
+                <div class="flex-1">
+                    <input type="text" id="searchInput" placeholder="Search clients..." 
+                           class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500">
+                </div>
+                <select id="filterStatus" class="px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500">
+                    <option value="all">All Status</option>
+                    <option value="active">Active</option>
+                    <option value="inactive">Inactive</option>
+                </select>
+                <button onclick="loadClients()" class="bg-gray-200 hover:bg-gray-300 px-4 py-2 rounded-lg">
+                    Refresh
+                </button>
+            </div>
+        </div>
+
+        <!-- Bulk Operations Toolbar removed -->
+
+        <!-- Clients Table -->
+        <div class="bg-white rounded-lg shadow overflow-hidden">
+            <div class="overflow-x-auto">
+                <table class="w-full">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Name
+                            </th>
+                            <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Created
+                            </th>
+                            <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Expires
+                            </th>
+                            <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Status
+                            </th>
+                            <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Traffic
+                            </th>
+                            <th class="px-6 py-4 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Actions
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody id="clientsTable" class="divide-y divide-gray-200">
+                        <tr>
+                            <td colspan="6" class="px-6 py-8 text-center text-gray-500">
+                                Loading clients...
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Orphaned Certificates Section -->
+        <div class="mt-8">
+            <div class="bg-yellow-50 border-l-4 border-yellow-400 p-6 rounded-lg">
+                <div class="flex items-start justify-between">
+                    <div class="flex items-start">
+                        <svg class="w-6 h-6 text-yellow-400 mr-3 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
+                        </svg>
+                        <div>
+                            <h3 class="text-lg font-semibold text-yellow-800">Orphaned Certificates</h3>
+                            <p class="text-sm text-yellow-700 mt-1">
+                                Certificates that exist in PKI but not in database - <strong>SECURITY RISK!</strong>
+                            </p>
+                            <p id="orphanedList" class="text-sm text-yellow-600 mt-2 font-mono"></p>
+                        </div>
+                    </div>
+                    <button onclick="checkOrphaned()" class="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-lg text-sm font-medium">
+                        Check Now
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Client Modal -->
+    <div id="addModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div class="bg-white rounded-lg p-8 max-w-lg w-full mx-4">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">Add New Client</h2>
+            <form id="addClientForm">
+                <div class="mb-4">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Client Name</label>
+                    <input type="text" id="clientName" 
+                           class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
+                           placeholder="e.g., john_doe" required>
+                    <p class="text-xs text-gray-500 mt-1">Use letters, numbers, underscore, and hyphen only</p>
+                </div>
+
+                <div class="mb-4">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Email (Optional)</label>
+                    <input type="email" id="clientEmail" 
+                           class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
+                           placeholder="client@example.com">
+                </div>
+
+                <div class="mb-4">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Expiration (Days)</label>
+                    <input type="number" id="expirationDays" 
+                           class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
+                           placeholder="30" value="30" min="1">
+                    <p class="text-xs text-gray-500 mt-1">Number of days until client expires (default: 30)</p>
+                </div>
+
+                <div class="mb-4">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Traffic Limit (Optional)</label>
+                    <div class="flex gap-2">
+                        <input type="number" id="trafficLimit" 
+                               class="flex-1 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
+                               placeholder="0" min="0" step="0.1">
+                        <select id="trafficUnit" class="px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500">
+                            <option value="MB">MB</option>
+                            <option value="GB" selected>GB</option>
+                            <option value="TB">TB</option>
+                        </select>
+                    </div>
+                    <p class="text-xs text-gray-500 mt-1">Leave as 0 for unlimited traffic</p>
+                </div>
+
+                <div class="mb-6">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Server Configuration</label>
+                    <select id="clientInbound" 
+                            class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
+                            required>
+                        <option value="">Select Inbound</option>
+                        <!-- Options will be populated from server configs -->
+                    </select>
+                    <div id="inboundInfo" class="mt-2 text-sm text-gray-600 hidden">
+                        <div class="bg-gray-50 p-3 rounded-lg">
+                            <div class="grid grid-cols-2 gap-2">
+                                <div><span class="font-medium">Port:</span> <span id="inboundPort">-</span></div>
+                                <div><span class="font-medium">Protocol:</span> <span id="inboundProtocol">-</span></div>
+                                <div><span class="font-medium">Cipher:</span> <span id="inboundCipher">-</span></div>
+                                <div><span class="font-medium">Status:</span> <span id="inboundStatus">-</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex gap-4">
+                    <button type="button" onclick="hideAddModal()" 
+                            class="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-800 py-2 rounded-lg font-medium">
+                        Cancel
+                    </button>
+                    <button type="submit" 
+                            class="flex-1 bg-purple-600 hover:bg-purple-700 text-white py-2 rounded-lg font-medium">
+                        Create Client
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Client Details Modal -->
+    <div id="detailsModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div class="bg-white rounded-lg p-8 max-w-2xl w-full mx-4 max-h-screen overflow-y-auto">
+            <div class="flex justify-between items-start mb-6">
+                <h2 class="text-2xl font-bold text-gray-800">Client Details</h2>
+                <button onclick="hideDetailsModal()" class="text-gray-400 hover:text-gray-600">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                </button>
+            </div>
+            <div id="clientDetails" class="space-y-4">
+                <!-- Details will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <script src="js/api.js"></script>
+    <script src="js/notifications.js"></script>
+    <script src="js/qrcode.js"></script>
+    <script src="js/websocket.js"></script>
+    <script>
+        checkAuth();
+
+        let allClients = [];
+
+        // Load clients
+        async function loadClients() {
+            try {
+                const result = await api.getClients();
+                if (result.success) {
+                    allClients = result.data || [];
+                    renderClients(allClients);
+                    
+                    // Update last connection and traffic data
+                    updateClientConnections();
+                }
+            } catch (error) {
+                console.error('Failed to load clients:', error);
+                showToast('Failed to load clients', 'error');
+            }
+        }
+
+        // Update client connections and traffic data
+        async function updateClientConnections() {
+            try {
+                // Fetch real-time stats for each client
+                for (const client of allClients) {
+                    // Try to get updated stats from API
+                    try {
+                        const statsResult = await api.getClientStats(client.name);
+                        if (statsResult.success && statsResult.data) {
+                            Object.assign(client, statsResult.data);
+                        }
+                    } catch (e) {
+                        // If stats not available, continue with existing data
+                        console.log(`Stats not available for ${client.name}`);
+                    }
+                }
+                
+                // Re-render with updated data
+                renderClients(allClients);
+            } catch (error) {
+                console.error('Failed to update client connections:', error);
+            }
+        }
+
+        // Render clients table
+        function renderClients(clients) {
+            const tbody = document.getElementById('clientsTable');
+            
+            if (clients.length === 0) {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="6" class="px-6 py-8 text-center text-gray-500">
+                            No clients found. Click "Add Client" to create one.
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+
+            tbody.innerHTML = clients.map(client => `
+                <tr class="hover:bg-gray-50 transition-colors duration-150">
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <div class="flex items-center">
+                            <div class="text-sm font-medium text-gray-900">${client.name}</div>
+                        </div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <div class="text-sm text-gray-600">${formatDate(client.created_at)}</div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <div class="text-sm text-gray-600">${formatDate(client.expires_at)}</div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <div class="flex flex-col space-y-1">
+                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
+                                client.active ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800'
+                            }">
+                                <span class="w-1.5 h-1.5 mr-1.5 rounded-full ${
+                                    client.active ? 'bg-green-400' : 'bg-gray-400'
+                                }"></span>
+                                ${client.active ? 'Active' : 'Inactive'}
+                            </span>
+                            ${client.last_connection ? `
+                                <div class="text-xs text-gray-500 flex items-center">
+                                    <svg class="w-3 h-3 mr-1 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                    </svg>
+                                    Last: ${formatLastConnection(client.last_connection)}
+                                </div>
+                            ` : `
+                                <div class="text-xs text-gray-400 flex items-center">
+                                    <svg class="w-3 h-3 mr-1 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                    </svg>
+                                    Never connected
+                                </div>
+                            `}
+                        </div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <div class="text-sm text-gray-600">
+                            <div class="flex flex-col">
+                                <span class="text-xs text-gray-500">↑ ${formatBytes(client.bytes_sent || 0)}</span>
+                                <span class="text-xs text-gray-500">↓ ${formatBytes(client.bytes_received || 0)}</span>
+                                <span class="text-xs text-blue-500 font-medium">Total: ${formatBytes((client.bytes_sent || 0) + (client.bytes_received || 0))}</span>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-center">
+                        <div class="flex items-center justify-center space-x-2">
+                            ${client.active ? `
+                                <button onclick="deactivateClient('${client.name}')" 
+                                        class="inline-flex items-center px-2 py-1 text-xs font-medium text-yellow-600 hover:text-yellow-800 hover:bg-yellow-50 rounded-md transition-colors duration-150"
+                                        title="Deactivate">
+                                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"/>
+                                    </svg>
+                                </button>
+                            ` : `
+                                <button onclick="activateClient('${client.name}')" 
+                                        class="inline-flex items-center px-2 py-1 text-xs font-medium text-green-600 hover:text-green-800 hover:bg-green-50 rounded-md transition-colors duration-150"
+                                        title="Activate">
+                                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                    </svg>
+                                </button>
+                            `}
+                            <button onclick="showDetails('${client.name}')" 
+                                    class="inline-flex items-center px-2 py-1 text-xs font-medium text-blue-600 hover:text-blue-800 hover:bg-blue-50 rounded-md transition-colors duration-150"
+                                    title="View Details">
+                                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                                </svg>
+                            </button>
+                            <button onclick="exportClient('${client.name}')" 
+                                    class="inline-flex items-center px-2 py-1 text-xs font-medium text-purple-600 hover:text-purple-800 hover:bg-purple-50 rounded-md transition-colors duration-150"
+                                    title="Download Config">
+                                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                                </svg>
+                            </button>
+                            <button onclick="removeClient('${client.name}')" 
+                                    class="inline-flex items-center px-3 py-1.5 text-xs font-medium text-red-600 hover:text-red-800 hover:bg-red-50 rounded-md transition-colors duration-150">
+                                <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                                </svg>
+                                Remove
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        // Filter clients
+        document.getElementById('searchInput').addEventListener('input', filterClients);
+        document.getElementById('filterStatus').addEventListener('change', filterClients);
+
+        function filterClients() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const statusFilter = document.getElementById('filterStatus').value;
+
+            let filtered = allClients;
+
+            // Search filter
+            if (searchTerm) {
+                filtered = filtered.filter(client => 
+                    client.name.toLowerCase().includes(searchTerm)
+                );
+            }
+
+            // Status filter
+            if (statusFilter !== 'all') {
+                filtered = filtered.filter(client => 
+                    statusFilter === 'active' ? client.active : !client.active
+                );
+            }
+
+            renderClients(filtered);
+        }
+
+        // Show add modal
+        async function showAddModal() {
+            document.getElementById('addModal').classList.remove('hidden');
+            await loadInboundConfigurations();
+        }
+
+        function hideAddModal() {
+            document.getElementById('addModal').classList.add('hidden');
+            document.getElementById('addClientForm').reset();
+            document.getElementById('inboundInfo').classList.add('hidden');
+        }
+
+        // Load inbound configurations
+        async function loadInboundConfigurations() {
+            try {
+                const token = localStorage.getItem('token');
+                if (!token) {
+                    console.error('No auth token available');
+                    return;
+                }
+                
+                const response = await fetch('/api/openvpn/configs', {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+                const result = await response.json();
+                
+                const select = document.getElementById('clientInbound');
+                select.innerHTML = '<option value="">Select Inbound</option>';
+                
+                if (result.success && result.data.configs) {
+                    result.data.configs.forEach(config => {
+                        const option = document.createElement('option');
+                        option.value = config.name;
+                        option.textContent = `${config.name} (${config.protocol}/${config.port})`;
+                        option.dataset.config = JSON.stringify(config);
+                        select.appendChild(option);
+                    });
+                } else {
+                    const option = document.createElement('option');
+                    option.value = '';
+                    option.textContent = 'No server configurations found';
+                    option.disabled = true;
+                    select.appendChild(option);
+                }
+            } catch (error) {
+                console.error('Failed to load inbound configurations:', error);
+                const select = document.getElementById('clientInbound');
+                select.innerHTML = '<option value="">Error loading configurations</option>';
+            }
+        }
+
+        // Handle inbound selection change
+        document.getElementById('clientInbound').addEventListener('change', function() {
+            const selectedOption = this.options[this.selectedIndex];
+            const inboundInfo = document.getElementById('inboundInfo');
+            
+            if (selectedOption.value && selectedOption.dataset.config) {
+                const config = JSON.parse(selectedOption.dataset.config);
+                document.getElementById('inboundPort').textContent = config.port;
+                document.getElementById('inboundProtocol').textContent = config.protocol.toUpperCase();
+                document.getElementById('inboundCipher').textContent = config.cipher;
+                document.getElementById('inboundStatus').textContent = config.status;
+                
+                // Update status color
+                const statusElement = document.getElementById('inboundStatus');
+                statusElement.className = '';
+                if (config.status === 'active') {
+                    statusElement.className = 'text-green-600 font-medium';
+                } else if (config.status === 'error') {
+                    statusElement.className = 'text-red-600 font-medium';
+                }
+                
+                inboundInfo.classList.remove('hidden');
+            } else {
+                inboundInfo.classList.add('hidden');
+            }
+        });
+
+        // Add client
+        document.getElementById('addClientForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const name = document.getElementById('clientName').value.trim();
+            const email = document.getElementById('clientEmail').value.trim();
+            const inbound = document.getElementById('clientInbound').value;
+
+            // Validate client name
+            if (!name) {
+                showToast('Client name is required', 'error');
+                return;
+            }
+
+            // Validate client name format (letters, numbers, underscore, hyphen only)
+            const nameRegex = /^[a-zA-Z0-9_-]+$/;
+            if (!nameRegex.test(name)) {
+                showToast('Client name can only contain letters, numbers, underscore, and hyphen', 'error');
+                return;
+            }
+
+            // Validate client name length
+            if (name.length < 3 || name.length > 50) {
+                showToast('Client name must be between 3 and 50 characters', 'error');
+                return;
+            }
+
+            // Validate email if provided
+            if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                showToast('Invalid email format', 'error');
+                return;
+            }
+
+            if (!inbound) {
+                showToast('Please select a server configuration', 'error');
+                return;
+            }
+
+            const expirationDays = parseInt(document.getElementById('expirationDays').value) || 30;
+            const trafficLimit = parseFloat(document.getElementById('trafficLimit').value) || 0;
+            const trafficUnit = document.getElementById('trafficUnit').value;
+            
+            let trafficLimitBytes = 0;
+            if (trafficLimit > 0) {
+                switch(trafficUnit) {
+                    case 'MB':
+                        trafficLimitBytes = trafficLimit * 1024 * 1024;
+                        break;
+                    case 'GB':
+                        trafficLimitBytes = trafficLimit * 1024 * 1024 * 1024;
+                        break;
+                    case 'TB':
+                        trafficLimitBytes = trafficLimit * 1024 * 1024 * 1024 * 1024;
+                        break;
+                }
+            }
+
+            try {
+                const response = await fetch('/api/clients', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer ' + localStorage.getItem('token')
+                    },
+                    body: JSON.stringify({
+                        name: name,
+                        email: email,
+                        expiration_days: expirationDays,
+                        traffic_limit_bytes: trafficLimitBytes
+                    })
+                });
+                
+                const result = await response.json();
+                if (result.success) {
+                    showToast(`Client "${name}" created successfully!`, 'success');
+                    hideAddModal();
+                    loadClients();
+                } else {
+                    showToast(result.message || 'Failed to create client', 'error');
+                }
+            } catch (error) {
+                showToast('Failed to create client', 'error');
+            }
+        });
+
+        // Activate client
+        async function activateClient(name) {
+            if (!confirm(`Activate client "${name}"?`)) {
+                return;
+            }
+
+            try {
+                const response = await fetch(`/api/clients/${name}/activate`, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem('token')
+                    }
+                });
+                
+                const result = await response.json();
+                if (result.success) {
+                    showToast(`Client "${name}" activated!`, 'success');
+                    loadClients();
+                } else {
+                    showToast(result.message || 'Failed to activate client', 'error');
+                }
+            } catch (error) {
+                showToast('Failed to activate client', 'error');
+            }
+        }
+
+        // Deactivate client
+        async function deactivateClient(name) {
+            if (!confirm(`Deactivate client "${name}"?\n\nThis will:\n- Revoke the certificate\n- Disconnect active sessions\n- Prevent new connections`)) {
+                return;
+            }
+
+            try {
+                const response = await fetch(`/api/clients/${name}/deactivate`, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem('token')
+                    }
+                });
+                
+                const result = await response.json();
+                if (result.success) {
+                    showToast(`Client "${name}" deactivated!`, 'warning');
+                    loadClients();
+                } else {
+                    showToast(result.message || 'Failed to deactivate client', 'error');
+                }
+            } catch (error) {
+                showToast('Failed to deactivate client', 'error');
+            }
+        }
+
+        // Remove client
+        async function removeClient(name) {
+            if (!confirm(`Are you sure you want to remove "${name}"?\n\nThis will:\n- Revoke the certificate\n- Update CRL\n- Delete all files\n- Block client from connecting\n\nThis action cannot be undone!`)) {
+                return;
+            }
+
+            try {
+                const result = await api.deleteClient(name);
+                if (result.success) {
+                    showToast(`Client "${name}" removed and certificate revoked!`, 'success');
+                    // Clear cache to force reload
+                    api.invalidateCache('/clients');
+                    loadClients();
+                } else {
+                    showToast(result.message || 'Failed to remove client', 'error');
+                }
+            } catch (error) {
+                showToast('Failed to remove client', 'error');
+            }
+        }
+
+        // Export client
+        async function exportClient(name) {
+            try {
+                await api.exportClient(name);
+                showToast(`Downloading ${name}.ovpn...`, 'success');
+            } catch (error) {
+                showToast('Failed to export client config', 'error');
+            }
+        }
+
+        // Check status
+        async function checkStatus(name) {
+            try {
+                const result = await api.getClientStatus(name);
+                if (result.success) {
+                    const status = result.data.status;
+                    const statusClass = status.includes('Valid') ? 'text-green-600' : 
+                                       status.includes('Revoked') ? 'text-red-600' : 'text-yellow-600';
+                    
+                    alert(`Certificate Status for "${name}":\n\n${status}\n\n${
+                        status.includes('Valid') ? '✓ Client can connect' : 
+                        status.includes('Revoked') ? '✗ Client is blocked' : 
+                        '⚠ Check certificate'
+                    }`);
+                }
+            } catch (error) {
+                showToast('Failed to check certificate status', 'error');
+            }
+        }
+
+        // Show details
+        async function showDetails(name) {
+            const client = allClients.find(c => c.name === name);
+            if (!client) return;
+
+            document.getElementById('clientDetails').innerHTML = `
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <p class="text-sm text-gray-600">Name</p>
+                        <p class="font-semibold">${client.name}</p>
+                    </div>
+                    <div>
+                        <p class="text-sm text-gray-600">Status</p>
+                        <p class="font-semibold ${client.active ? 'text-green-600' : 'text-gray-600'}">
+                            ${client.active ? 'Active' : 'Inactive'}
+                        </p>
+                    </div>
+                    <div>
+                        <p class="text-sm text-gray-600">Created</p>
+                        <p class="font-semibold">${formatDate(client.created_at)}</p>
+                    </div>
+                    <div>
+                        <p class="text-sm text-gray-600">Expires</p>
+                        <p class="font-semibold">${formatDate(client.expires_at)}</p>
+                    </div>
+                    <div>
+                        <p class="text-sm text-gray-600">IP Address</p>
+                        <p class="font-semibold">${client.ip || 'Not assigned'}</p>
+                    </div>
+                    <div>
+                        <p class="text-sm text-gray-600">Cipher</p>
+                        <p class="font-semibold">${client.cipher || 'AES-256-GCM'}</p>
+                    </div>
+                    <div>
+                        <p class="text-sm text-gray-600">Data Uploaded</p>
+                        <p class="font-semibold">${formatBytes(client.bytes_sent || 0)}</p>
+                    </div>
+                    <div>
+                        <p class="text-sm text-gray-600">Data Downloaded</p>
+                        <p class="font-semibold">${formatBytes(client.bytes_received || 0)}</p>
+                    </div>
+                </div>
+                <div class="mt-6 flex gap-2">
+                    <button onclick="exportClient('${client.name}')" 
+                            class="flex-1 bg-green-500 hover:bg-green-600 text-white py-2 rounded-lg">
+                        Download Config
+                    </button>
+                    <button onclick="checkStatus('${client.name}')" 
+                            class="flex-1 bg-purple-500 hover:bg-purple-600 text-white py-2 rounded-lg">
+                        Check Status
+                    </button>
+                </div>
+            `;
+
+            document.getElementById('detailsModal').classList.remove('hidden');
+        }
+
+        function hideDetailsModal() {
+            document.getElementById('detailsModal').classList.add('hidden');
+        }
+
+        // Check orphaned certificates
+        async function checkOrphaned() {
+            try {
+                const result = await api.getOrphanedClients();
+                const listEl = document.getElementById('orphanedList');
+                
+                if (result.success && result.data && result.data.count > 0) {
+                    const orphaned = result.data.orphaned || [];
+                    listEl.innerHTML = `Found ${orphaned.length} orphaned certificate(s): ${orphaned.join(', ')}`;
+                    
+                    if (confirm(`Found ${orphaned.length} orphaned certificates!\n\nThese can still connect to your VPN.\n\nDo you want to revoke them now?`)) {
+                        const cleanupResult = await api.cleanupOrphaned();
+                        if (cleanupResult.success) {
+                            showToast('Orphaned certificates revoked successfully!', 'success');
+                            checkOrphaned();
+                        }
+                    }
+                } else {
+                    listEl.innerHTML = '✓ No orphaned certificates found. System is secure!';
+                    listEl.className = 'text-sm text-green-600 mt-2 font-mono';
+                    setTimeout(() => {
+                        listEl.className = 'text-sm text-yellow-600 mt-2 font-mono';
+                    }, 3000);
+                }
+            } catch (error) {
+                showToast('Failed to check orphaned certificates', 'error');
+            }
+        }
+
+        // Utility functions
+        function formatBytes(bytes) {
+            if (bytes === 0) return '0 B';
+            const k = 1024;
+            const sizes = ['B', 'KB', 'MB', 'GB', 'TB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+        }
+
+        function formatDate(dateString) {
+            if (!dateString) return '-';
+            const date = new Date(dateString);
+            return date.toLocaleDateString() + ' ' + date.toLocaleTimeString();
+        }
+
+        function formatLastConnection(dateString) {
+            if (!dateString) return 'Never';
+            const date = new Date(dateString);
+            const now = new Date();
+            const diffMs = now - date;
+            const diffMins = Math.floor(diffMs / 60000);
+            const diffHours = Math.floor(diffMins / 60);
+            const diffDays = Math.floor(diffHours / 24);
+
+            if (diffMins < 1) {
+                return 'Just now';
+            } else if (diffMins < 60) {
+                return `${diffMins}m ago`;
+            } else if (diffHours < 24) {
+                return `${diffHours}h ago`;
+            } else if (diffDays < 7) {
+                return `${diffDays}d ago`;
+            } else {
+                return date.toLocaleDateString();
+            }
+        }
+
+        // Initial load
+        loadClients();
+        checkOrphaned();
+
+        // Auto-refresh clients and their connection data every 30 seconds
+        setInterval(() => {
+            loadClients();
+        }, 30000);
+
+        // Initialize sidebar
+        initSidebar('clients');
+    </script>
+    </div>
+</body>
+</html>
+

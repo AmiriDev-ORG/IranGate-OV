@@ -1,0 +1,26 @@
+{
+  "jobs": [
+    {
+      "id": "backup_daily",
+      "schedule": "0 2 * * *",
+      "action": "backup",
+      "params": {
+        "retention_days": 7,
+        "type": "full"
+      },
+      "last_run": null,
+      "enabled": true
+    },
+    {
+      "id": "monitor_check",
+      "schedule": "*/30 * * * *",
+      "action": "monitor",
+      "params": {
+        "alert_threshold": 90,
+        "type": "health"
+      },
+      "last_run": null,
+      "enabled": true
+    }
+  ]
+}
