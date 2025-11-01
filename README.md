@@ -31,7 +31,7 @@
 ## Installation
 
 ```bash
-git clone https://github.com/AmiriDev_ORG/IranGate-OV.git
+git clone https://github.com/AmiriDev-ORG/IranGate-OV.git
 cd IranGate-OV
 chmod +x install.sh
 sudo ./install.sh
