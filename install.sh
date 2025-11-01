@@ -44,7 +44,7 @@ display_banner() {
     echo -e "  ${GREEN}✓${NC} IranGate Web Panel"
     echo ""
     echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
-    echo -e "${BLUE}📦 Project's Git:${NC} ${GREEN}https://github.com/AmiriDev_ORG/IranGate-OV${NC}"
+    echo -e "${BLUE}📦 Project's Git:${NC} ${GREEN}https://github.com/AmiriDev-ORG/IranGate-OV${NC}"
     echo -e "${BLUE}📢 Telegram Channel:${NC} ${GREEN}@IranGate_Official${NC}"
     echo -e "${BLUE}👤 Project Author:${NC} ${GREEN}@AmiriDev_ORG${NC}"
     echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
