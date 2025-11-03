@@ -1,6 +1,6 @@
 # IranGate-OV 🚀
 
-**Professional OpenVPN Gateway Management System with AI Monitoring & Web Panel**
+**Professional OpenVPN Gateway Management System with AI Assistant & Web Panel**
 
 ---
 
