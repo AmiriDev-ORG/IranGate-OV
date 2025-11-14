@@ -79,12 +79,6 @@ irangate/
 * Aggregates hourly → daily → monthly
 * Sends alerts & updates Web Panel via WebSocket
 
-### AI Auto-Healing ( Under Codes - Working for it !)
-
-* Python agent monitors CPU, RAM, Disk, Network
-* Analyzes via OpenAI API
-* Performs auto-recovery & sends Telegram alerts
-
 ---
 
 ## Tech Stack
@@ -108,6 +102,7 @@ irangate/
 
 ## 💰 Donation: [DonateLink](https://donito.me/irangate)
 ---
+
 
 ## License
 
