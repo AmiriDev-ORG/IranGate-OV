@@ -100,9 +100,6 @@ irangate/
 
 ---
 
-## 💰 Donation: [DonateLink](https://donito.me/irangate)
----
-
 
 ## License
 
